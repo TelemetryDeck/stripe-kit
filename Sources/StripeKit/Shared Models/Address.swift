@@ -6,7 +6,7 @@
 //
 //
 
-public struct Address: Codable {
+public struct Address: Codable, Sendable {
     /// City/District/Suburb/Town/Village.
     public var city: String?
     /// 2-letter country code.
@@ -35,7 +35,7 @@ public struct Address: Codable {
     }
 }
 
-public struct AddressKana: Codable {
+public struct AddressKana: Codable, Sendable {
     /// City/Ward
     public var city: String?
     /// Two-letter country code (ISO 3166-1 alpha-2).
@@ -68,7 +68,7 @@ public struct AddressKana: Codable {
     }
 }
 
-public struct AddressKanji: Codable {
+public struct AddressKanji: Codable, Sendable {
     /// City/Ward
     public var city: String?
     /// Two-letter country code (ISO 3166-1 alpha-2).

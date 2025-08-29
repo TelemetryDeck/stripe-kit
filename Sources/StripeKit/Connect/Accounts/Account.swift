@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Account Object](https://stripe.com/docs/api/accounts/object)
-public struct ConnectAccount: Codable {
+public struct ConnectAccount: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The business type.
@@ -102,7 +102,7 @@ public struct ConnectAccount: Codable {
     }
 }
 
-public struct ConnectAccountList: Codable {
+public struct ConnectAccountList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?
@@ -119,7 +119,7 @@ public struct ConnectAccountList: Codable {
     }
 }
 
-public struct ConnectAccountBusinessProfile: Codable {
+public struct ConnectAccountBusinessProfile: Codable, Sendable {
     /// [The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc). MCCs are used to classify businesses based on the goods or services they provide.
     public var mcc: String?
     /// The customer-facing business name.
@@ -156,14 +156,14 @@ public struct ConnectAccountBusinessProfile: Codable {
     }
 }
 
-public enum ConnectAccountBusinessType: String, Codable {
+public enum ConnectAccountBusinessType: String, Codable, Sendable {
     case individual
     case company
     case nonProfit = "non_profit"
     case governmentEntity = "government_entity"
 }
 
-public struct ConnectAccountCapablities: Codable {
+public struct ConnectAccountCapablities: Codable, Sendable {
     /// The status of the ACSS Direct Debits payments capability of the account, or whether the account can directly process ACSS Direct Debits charges.
     public var acssDebitPayments: ConnectAccountCapabilitiesStatus?
     /// The status of the Affirm capability of the account, or whether the account can directly process Affirm charges.
@@ -305,13 +305,13 @@ public struct ConnectAccountCapablities: Codable {
     }
 }
 
-public enum ConnectAccountCapabilitiesStatus: String, Codable {
+public enum ConnectAccountCapabilitiesStatus: String, Codable, Sendable {
     case active
     case inactive
     case pending
 }
 
-public struct ConnectAccountController: Codable {
+public struct ConnectAccountController: Codable, Sendable {
     /// `true` if the Connect application retrieving the resource controls the account and can therefore exercise platform controls. Otherwise, this field is null.
     public var isController: Bool?
     /// The controller type. Can be `application`, if a Connect application controls the account, or `account`, if the account controls itself.
@@ -323,12 +323,12 @@ public struct ConnectAccountController: Codable {
     }
 }
 
-public enum ConnectAccountControllerType: String, Codable {
+public enum ConnectAccountControllerType: String, Codable, Sendable {
     case application
     case account
 }
 
-public struct ConnectAccountCompany: Codable {
+public struct ConnectAccountCompany: Codable, Sendable {
     /// The company’s primary address.
     public var address: Address?
     /// The Kana variation of the company’s primary address (Japan only).
@@ -405,7 +405,7 @@ public struct ConnectAccountCompany: Codable {
     }
 }
 
-public struct ConnectAccountCompanyOwnershipDeclaration: Codable {
+public struct ConnectAccountCompanyOwnershipDeclaration: Codable, Sendable {
     /// The Unix timestamp marking when the beneficial owner attestation was made.
     public var date: Date?
     /// The IP address from which the beneficial owner attestation was made.
@@ -422,7 +422,7 @@ public struct ConnectAccountCompanyOwnershipDeclaration: Codable {
     }
 }
 
-public struct ConnectAccountCompanyVerification: Codable {
+public struct ConnectAccountCompanyVerification: Codable, Sendable {
     /// A document for the company.
     public var document: ConnectAccountCompanyVerificationDocument?
     
@@ -431,7 +431,7 @@ public struct ConnectAccountCompanyVerification: Codable {
     }
 }
 
-public struct ConnectAccountCompanyVerificationDocument: Codable {
+public struct ConnectAccountCompanyVerificationDocument: Codable, Sendable {
     /// The back of a document returned by a file upload with a `purpose` value of `additional_verification`.
     @Expandable<File> public var back: String?
     /// A user-displayable string describing the verification state of this document.
@@ -452,7 +452,7 @@ public struct ConnectAccountCompanyVerificationDocument: Codable {
     }
 }
 
-public enum ConnectAccountCompanyVerificationDocumentDetailsCode: String, Codable {
+public enum ConnectAccountCompanyVerificationDocumentDetailsCode: String, Codable, Sendable {
     case documentCorrupt = "document_corrupt"
     case documentExpired = "document_expired"
     case documentFailedCopy = "document_failed_copy"
@@ -469,7 +469,7 @@ public enum ConnectAccountCompanyVerificationDocumentDetailsCode: String, Codabl
     case documentTooLarge = "document_too_large"
 }
 
-public enum ConnectAccountCompanyStructure: String, Codable {
+public enum ConnectAccountCompanyStructure: String, Codable, Sendable {
     case governmentInstrumentality = "government_instrumentality"
     case governmentalUnit = "governmental_unit"
     case incorporatedNonProfit = "incorporated_non_profit"
@@ -492,7 +492,7 @@ public enum ConnectAccountCompanyStructure: String, Codable {
     case llc
 }
 
-public struct ConnectAccountRequirements: Codable {
+public struct ConnectAccountRequirements: Codable, Sendable {
     ///Fields that are due and can be satisfied by providing the corresponding alternative fields instead.
     public var alternatives: [ConnectAccountRequirementsAlternative]?
     /// Date by which the fields in `currently_due` must be collected to keep the account enabled. These fields may disable the account sooner if the next threshold is reached before they are collected.
@@ -529,7 +529,7 @@ public struct ConnectAccountRequirements: Codable {
     }
 }
 
-public struct ConnectAccountRequirementsAlternative: Codable {
+public struct ConnectAccountRequirementsAlternative: Codable, Sendable {
     /// Fields that can be provided to satisfy all fields in `original_fields_due`.
     public var alternativeFieldsDue: [String]?
     /// Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.
@@ -541,7 +541,7 @@ public struct ConnectAccountRequirementsAlternative: Codable {
     }
 }
 
-public enum ConnectAccountRequirementsDisabledReason: String, Codable {
+public enum ConnectAccountRequirementsDisabledReason: String, Codable, Sendable {
     case requirementsPastDue = "requirements.past_due"
     case requirementsPendingVerification = "requirements.pending_verification"
     case listed
@@ -554,7 +554,7 @@ public enum ConnectAccountRequirementsDisabledReason: String, Codable {
     case other
 }
 
-public struct ConnectAccountRequirementsError: Codable {
+public struct ConnectAccountRequirementsError: Codable, Sendable {
     /// The code for the type of error.
     public var code: ConnectAccountRequirementsErrorCode?
     /// An informative message that indicates the error type and provides additional details about the error.
@@ -571,7 +571,7 @@ public struct ConnectAccountRequirementsError: Codable {
     }
 }
 
-public enum ConnectAccountRequirementsErrorCode: String, Codable {
+public enum ConnectAccountRequirementsErrorCode: String, Codable, Sendable {
     /// The combination of the city, state, and postal code in the provided address could not be validated.
     case invalidAddressCityStatePostalCode = "invalid_address_city_state_postal_code"
     /// The street name and/or number for the provided address could not be validated.
@@ -704,7 +704,7 @@ public enum ConnectAccountRequirementsErrorCode: String, Codable {
     case invalidUrlDenylisted = "invalid_url_denylisted"
 }
 
-public struct ConnectAccountFutureRequirements: Codable {
+public struct ConnectAccountFutureRequirements: Codable, Sendable {
     /// Fields that are due and can be satisfied by providing the corresponding alternative fields instead.
     public var alternatives: [ConnectAccountFutureRequirementsAlternative]?
     /// Date on which `future_requirements` merges with the main `requirements` hash and `future_requirements` becomes empty. After the transition, `currently_due` requirements may immediately become `past_due`, but the account may also be given a grace period depending on its enablement state prior to transitioning.
@@ -741,7 +741,7 @@ public struct ConnectAccountFutureRequirements: Codable {
     }
 }
 
-public struct ConnectAccountFutureRequirementsAlternative: Codable {
+public struct ConnectAccountFutureRequirementsAlternative: Codable, Sendable {
     /// Fields that can be provided to satisfy all fields in `original_fields_due`.
     public var alternativeFieldsDue: [String]?
     /// Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.
@@ -753,7 +753,7 @@ public struct ConnectAccountFutureRequirementsAlternative: Codable {
     }
 }
 
-public struct ConnectAccountSettings: Codable {
+public struct ConnectAccountSettings: Codable, Sendable {
     /// Settings specific to Bacs Direct Debit on the account.
     public var bacsDebitPayments: ConnectAccountSettingsBacsDebitPayments?
     /// Settings used to apply the account’s branding to email receipts, invoices, Checkout, and other products.
@@ -790,7 +790,7 @@ public struct ConnectAccountSettings: Codable {
     }
 }
 
-public struct ConnectAccountSettingsBacsDebitPayments: Codable {
+public struct ConnectAccountSettingsBacsDebitPayments: Codable, Sendable {
     /// The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct Debit, this will appear on the mandate, and as the statement descriptor.
     public var displayName: String?
     
@@ -799,7 +799,7 @@ public struct ConnectAccountSettingsBacsDebitPayments: Codable {
     }
 }
 
-public struct ConnectAccountSettingsBranding: Codable {
+public struct ConnectAccountSettingsBranding: Codable, Sendable {
     /// (ID of a file upload) An icon for the account. Must be square and at least 128px x 128px.
     @Expandable<File> public var icon: String?
     /// (ID of a file upload) A logo for the account that will be used in Checkout instead of the icon and without the account’s name next to it if provided. Must be at least 128px x 128px.
@@ -820,7 +820,7 @@ public struct ConnectAccountSettingsBranding: Codable {
     }
 }
 
-public struct ConnectAccountSettingsCardIssuing: Codable {
+public struct ConnectAccountSettingsCardIssuing: Codable, Sendable {
     /// Details on the account’s acceptance of the Stripe Issuing Terms and Disclosures.
     public var tosAcceptance: ConnectAccountSettingsCardIssuingTOSAcceptance?
     
@@ -829,7 +829,7 @@ public struct ConnectAccountSettingsCardIssuing: Codable {
     }
 }
 
-public struct ConnectAccountSettingsCardIssuingTOSAcceptance: Codable {
+public struct ConnectAccountSettingsCardIssuingTOSAcceptance: Codable, Sendable {
     /// The Unix timestamp marking when the account representative accepted the service agreement.
     public var date: Int?
     /// The IP address from which the account representative accepted the service agreement.
@@ -846,7 +846,7 @@ public struct ConnectAccountSettingsCardIssuingTOSAcceptance: Codable {
     }
 }
 
-public struct ConnectAccountSettingsCardPayments: Codable {
+public struct ConnectAccountSettingsCardPayments: Codable, Sendable {
     /// Automatically declines certain charge types regardless of whether the card issuer accepted or declined the charge.
     public var declineOn: ConnectAccountSettingsCardPaymentsDeclineOn?
     /// The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge. `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic portion.
@@ -867,7 +867,7 @@ public struct ConnectAccountSettingsCardPayments: Codable {
     }
 }
 
-public struct ConnectAccountSettingsCardPaymentsDeclineOn: Codable {
+public struct ConnectAccountSettingsCardPaymentsDeclineOn: Codable, Sendable {
     /// Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This setting only applies when a ZIP or postal code is provided and they fail bank verification.
     public var avsFailure: Bool?
     /// Whether Stripe automatically declines charges with an incorrect CVC. This setting only applies when a CVC is provided and it fails bank verification.
@@ -879,7 +879,7 @@ public struct ConnectAccountSettingsCardPaymentsDeclineOn: Codable {
     }
 }
 
-public struct ConnectAccountSettingsDashboard: Codable {
+public struct ConnectAccountSettingsDashboard: Codable, Sendable {
     /// The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.
     public var displayName: String?
     /// The timezone used in the Stripe Dashboard for this account. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones) .
@@ -891,7 +891,7 @@ public struct ConnectAccountSettingsDashboard: Codable {
     }
 }
 
-public struct ConnectAccountSettingsPayments: Codable {
+public struct ConnectAccountSettingsPayments: Codable, Sendable {
     /// The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.
     public var statementDescriptor: String?
     /// The Kana variation of the default text that appears on credit card statements when a charge is made (Japan only)
@@ -916,7 +916,7 @@ public struct ConnectAccountSettingsPayments: Codable {
     }
 }
 
-public struct ConnectAccountSettingsPayouts: Codable {
+public struct ConnectAccountSettingsPayouts: Codable, Sendable {
     /// A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our Understanding Connect Account Balances documentation for details. Default value is true for Express accounts and false for Custom accounts.
     public var debitNegativeBalances: Bool?
     /// Details on when funds from charges are available, and when they are paid out to an external account. See our Setting Bank and Debit Card Payouts documentation for details.
@@ -933,7 +933,7 @@ public struct ConnectAccountSettingsPayouts: Codable {
     }
 }
 
-public struct ConnectAccountSettingsPayoutSchedule: Codable {
+public struct ConnectAccountSettingsPayoutSchedule: Codable, Sendable {
     /// The number of days charges for the account will be held before being paid out.
     public var delayDays: Int?
     /// How frequently funds will be paid out. One of manual (payouts only created via API call), daily, weekly, or monthly.
@@ -954,7 +954,7 @@ public struct ConnectAccountSettingsPayoutSchedule: Codable {
     }
 }
 
-public struct ConnectAccountSettingsSepaDebitPayments: Codable {
+public struct ConnectAccountSettingsSepaDebitPayments: Codable, Sendable {
     /// SEPA creditor identifier that identifies the company making the payment.
     public var creditorId: String?
     
@@ -963,7 +963,7 @@ public struct ConnectAccountSettingsSepaDebitPayments: Codable {
     }
 }
 
-public struct ConnectAccountTOSAcceptance: Codable {
+public struct ConnectAccountTOSAcceptance: Codable, Sendable {
     /// The Unix timestamp marking when the Stripe Services Agreement was accepted by the account representative
     public var date: Date?
     /// The IP address from which the Stripe Services Agreement was accepted by the account representative
@@ -984,13 +984,13 @@ public struct ConnectAccountTOSAcceptance: Codable {
     }
 }
 
-public enum ConnectAccountType: String, Codable {
+public enum ConnectAccountType: String, Codable, Sendable {
     case standard
     case express
     case custom
 }
 
-public struct ConnectAccountLoginLink: Codable {
+public struct ConnectAccountLoginLink: Codable, Sendable {
     /// String representing the object’s type. Objects of the same type share the same value.
     public var object: String
     /// Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -1007,20 +1007,20 @@ public struct ConnectAccountLoginLink: Codable {
     }
 }
 
-public enum ConnectAccountRejectReason: String, Codable {
+public enum ConnectAccountRejectReason: String, Codable, Sendable {
     case fraud
     case termsOfService = "terms_of_service"
     case other
 }
 
-public enum ConnectAccountSettingsPayoutScheduleInterval: String, Codable {
+public enum ConnectAccountSettingsPayoutScheduleInterval: String, Codable, Sendable {
     case manual
     case daily
     case weekly
     case monthly
 }
 
-public enum ConnectAccountSettingsPayoutScheduleWeeklyAnchor: String, Codable {
+public enum ConnectAccountSettingsPayoutScheduleWeeklyAnchor: String, Codable, Sendable {
     case sunday
     case monday
     case tuesday

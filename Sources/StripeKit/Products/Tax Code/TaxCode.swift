@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TaxCode: Codable {
+public struct TaxCode: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -28,7 +28,7 @@ public struct TaxCode: Codable {
     }
 }
 
-public struct TaxCodeList: Codable {
+public struct TaxCodeList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

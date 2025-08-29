@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct InvoicePaymentSettingsPaymentMethodOptions: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptions: Codable, Sendable {
     /// If paying by `acss_debit`, this sub-hash contains details about the Canadian pre-authorized debit payment method options to pass to the invoice’s PaymentIntent.
     public var acssDebit: InvoicePaymentSettingsPaymentMethodOptionsAcssDebit?
     /// If paying by `bancontact`, this sub-hash contains details about the Bancontact payment method options to pass to the invoice’s PaymentIntent.
@@ -37,7 +37,7 @@ public struct InvoicePaymentSettingsPaymentMethodOptions: Codable {
 }
 
 // MARK: ACSS Debit
-public struct InvoicePaymentSettingsPaymentMethodOptionsAcssDebit: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsAcssDebit: Codable, Sendable {
     /// Additional fields for Mandate creation
     public var mandateOptions: InvoicePaymentSettingsPaymentMethodOptionsAcssDebitManadteOptions?
     /// Bank account verification method.
@@ -50,7 +50,7 @@ public struct InvoicePaymentSettingsPaymentMethodOptionsAcssDebit: Codable {
     }
 }
 
-public struct InvoicePaymentSettingsPaymentMethodOptionsAcssDebitManadteOptions: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsAcssDebitManadteOptions: Codable, Sendable {
     /// Transaction type of the mandate.
     public var transactionType: InvoicePaymentSettingsPaymentMethodOptionsAcssDebitManadteOptionsTransactionType?
     
@@ -59,14 +59,14 @@ public struct InvoicePaymentSettingsPaymentMethodOptionsAcssDebitManadteOptions:
     }
 }
 
-public enum InvoicePaymentSettingsPaymentMethodOptionsAcssDebitManadteOptionsTransactionType: String, Codable {
+public enum InvoicePaymentSettingsPaymentMethodOptionsAcssDebitManadteOptionsTransactionType: String, Codable, Sendable {
     /// Transactions are made for personal reasons
     case personal
     /// Transactions are made for business reasons
     case business
 }
 
-public enum InvoicePaymentSettingsPaymentMethodOptionsAcssDebitVerificationMethod: String, Codable {
+public enum InvoicePaymentSettingsPaymentMethodOptionsAcssDebitVerificationMethod: String, Codable, Sendable {
     /// Instant verification with fallback to microdeposits.
     case automatic
     /// Instant verification.
@@ -76,7 +76,7 @@ public enum InvoicePaymentSettingsPaymentMethodOptionsAcssDebitVerificationMetho
 }
 
 // MARK: Bancontact
-public struct InvoicePaymentSettingsPaymentMethodOptionsBancontact: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsBancontact: Codable, Sendable {
     /// Preferred language of the Bancontact authorization page that the customer is redirected to.
     public var preferredLanguage: String?
     
@@ -86,7 +86,7 @@ public struct InvoicePaymentSettingsPaymentMethodOptionsBancontact: Codable {
 }
 
 // MARK: Card
-public struct InvoicePaymentSettingsPaymentMethodOptionsCard: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsCard: Codable, Sendable {
     /// Installment details for this Invoice (Mexico only). For more information, see the installments integration guide.
     public var installments: InvoicePaymentSettingsPaymentMethodOptionsCardInstallments?
     
@@ -100,7 +100,7 @@ public struct InvoicePaymentSettingsPaymentMethodOptionsCard: Codable {
     }
 }
 
-public struct InvoicePaymentSettingsPaymentMethodOptionsCardInstallments: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsCardInstallments: Codable, Sendable {
     /// Whether Installments are enabled for this Invoice.
     public var enabled: Bool?
     
@@ -109,7 +109,7 @@ public struct InvoicePaymentSettingsPaymentMethodOptionsCardInstallments: Codabl
     }
 }
 
-public enum InvoicePaymentSettingsPaymentMethodOptionsCardRequestThreedSecure: String, Codable {
+public enum InvoicePaymentSettingsPaymentMethodOptionsCardRequestThreedSecure: String, Codable, Sendable {
     /// Triggers 3D Secure authentication only if it is required.
     case automatic
     /// Requires 3D Secure authentication if it is available.
@@ -117,7 +117,7 @@ public enum InvoicePaymentSettingsPaymentMethodOptionsCardRequestThreedSecure: S
 }
 
 // MARK: Customer Balance
-public struct InvoicePaymentSettingsPaymentMethodOptionsCustomerBalance: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsCustomerBalance: Codable, Sendable {
     /// Configuration for the bank transfer funding type, if the `funding_type` is set to `bank_transfer`.
     public var bankTransfer: InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransfer?
     /// The funding method type to be used when there are not enough funds in the customer balance. Permitted values include: `bank_transfer`
@@ -130,7 +130,7 @@ public struct InvoicePaymentSettingsPaymentMethodOptionsCustomerBalance: Codable
     }
 }
 
-public struct InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransfer: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransfer: Codable, Sendable {
     /// Configuration for `eu_bank_transfer` funding type.
     public var euBankTransfer: InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferEUBankTransfer?
     /// The bank transfer type that can be used for funding. Permitted values include: `eu_bank_transfer`, `gb_bank_transfer`, `jp_bank_transfer`, or `mx_bank_transfe`.
@@ -143,7 +143,7 @@ public struct InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTrans
     }
 }
 
-public struct InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferEUBankTransfer: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferEUBankTransfer: Codable, Sendable {
     /// The desired country code of the bank account information. Permitted values include: `BE`, `DE`, `ES`, `FR`, `IE`, or `NL`.
     public var country: String?
     
@@ -152,24 +152,24 @@ public struct InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTrans
     }
 }
 
-public enum InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferType: String, Codable {
+public enum InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceBankTransferType: String, Codable, Sendable {
     case euBankTransfer = "eu_bank_transfer"
     case gbBankTransfer = "gb_bank_transfer"
     case jpBankTransfer = "jp_bank_transfer"
     case mxBankTransfer = "mx_bank_transfer"
 }
 
-public enum InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceFundingType: String, Codable {
+public enum InvoicePaymentSettingsPaymentMethodOptionsCustomerBalanceFundingType: String, Codable, Sendable {
     case bankTransfer = "bank_transfer"
 }
 
 // MARK: Konbini
-public struct InvoicePaymentSettingsPaymentMethodOptionsKonbini: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsKonbini: Codable, Sendable {
     public init(){}
 }
 
 // MARK: US Bank Account
-public struct InvoicePaymentSettingsPaymentMethodOptionsUSBankAccount: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsUSBankAccount: Codable, Sendable {
     /// Additional fields for Financial Connections Session creation
     public var financialConnections: InvoicePaymentSettingsPaymentMethodOptionsUSBankAccountFinancialConnections?
     /// Bank account verification method.
@@ -182,7 +182,7 @@ public struct InvoicePaymentSettingsPaymentMethodOptionsUSBankAccount: Codable {
     }
 }
 
-public struct InvoicePaymentSettingsPaymentMethodOptionsUSBankAccountFinancialConnections: Codable {
+public struct InvoicePaymentSettingsPaymentMethodOptionsUSBankAccountFinancialConnections: Codable, Sendable {
     /// The list of permissions to request. The `payment_method` permission must be included.
     public var permissions: [InvoicePaymentSettingsPaymentMethodOptionsUSBankAccountFinancialConnectionsPermission]?
     
@@ -191,7 +191,7 @@ public struct InvoicePaymentSettingsPaymentMethodOptionsUSBankAccountFinancialCo
     }
 }
 
-public enum InvoicePaymentSettingsPaymentMethodOptionsUSBankAccountFinancialConnectionsPermission: String, Codable {
+public enum InvoicePaymentSettingsPaymentMethodOptionsUSBankAccountFinancialConnectionsPermission: String, Codable, Sendable {
     /// Allows the creation of a payment method from the account.
     case paymentMethod = "payment_method"
     /// Allows accessing balance data from the account.
@@ -200,7 +200,7 @@ public enum InvoicePaymentSettingsPaymentMethodOptionsUSBankAccountFinancialConn
     case transactions
 }
 
-public enum InvoicePaymentSettingsPaymentMethodOptionsUSBankAccountVerificationMethod: String, Codable {
+public enum InvoicePaymentSettingsPaymentMethodOptionsUSBankAccountVerificationMethod: String, Codable, Sendable {
     /// Instant verification with fallback to microdeposits.
     case automatic
     /// Instant verification only.

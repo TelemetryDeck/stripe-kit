@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Token Object](https://stripe.com/docs/api/tokens/object) .
-public struct Token: Codable {
+public struct Token: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -50,7 +50,7 @@ public struct Token: Codable {
     }
 }
 
-public enum TokenType: String, Codable {
+public enum TokenType: String, Codable, Sendable {
     case account
     case person
     case bankAccount = "bank_account"

@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Invoice Object](https://stripe.com/docs/api/invoices/object) .
-public struct Invoice: Codable {
+public struct Invoice: Codable, Sendable {
     /// Unique identifier for the object. This property is always present unless the invoice is an upcoming invoice. See Retrieve an upcoming invoice for more details.
     public var id: String?
     /// Controls whether Stripe will perform automatic collection of the invoice. When `false`, the invoice’s state will not automatically advance without an explicit action.
@@ -322,7 +322,7 @@ public struct Invoice: Codable {
     }
 }
 
-public struct SubscriptionDetails: Codable {
+public struct SubscriptionDetails: Codable, Sendable {
 	/// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
 	public var metadata: [String: String]?
 	
@@ -331,12 +331,12 @@ public struct SubscriptionDetails: Codable {
 	}
 }
 
-public enum InvoiceCollectionMethod: String, Codable {
+public enum InvoiceCollectionMethod: String, Codable, Sendable {
     case chargeAutomatically = "charge_automatically"
     case sendInvoice = "send_invoice"
 }
 
-public struct InvoiceAutomaticTax: Codable {
+public struct InvoiceAutomaticTax: Codable, Sendable {
     /// Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice items (invoice items with manually specified tax rates, negative amounts, or t`ax_behavior=unspecified`) cannot be added to automatic tax invoices.
     public var enabled: Bool?
     /// The status of the most recent automated tax calculation for this invoice.
@@ -348,7 +348,7 @@ public struct InvoiceAutomaticTax: Codable {
     }
 }
 
-public enum InvoiceAutomaticTaxStatus: String, Codable {
+public enum InvoiceAutomaticTaxStatus: String, Codable, Sendable {
     /// The location details supplied on the customer aren’t valid or don’t provide enough location information to accurately determine tax rates for the customer.
     case requiresLocationInputs = "requires_location_inputs"
     /// Stripe successfully calculated tax automatically on this invoice.
@@ -357,7 +357,7 @@ public enum InvoiceAutomaticTaxStatus: String, Codable {
     case failed
 }
 
-public enum InvoiceBillingReason: String, Codable {
+public enum InvoiceBillingReason: String, Codable, Sendable {
     case subscriptionCycle = "subscription_cycle"
     case subscriptionCreate = "subscription_create"
     case subscriptionUpdate = "subscription_update"
@@ -367,7 +367,7 @@ public enum InvoiceBillingReason: String, Codable {
     case subscriptionThreshold = "subscription_threshold"
 }
 
-public struct InvoiceCustomField: Codable {
+public struct InvoiceCustomField: Codable, Sendable {
     /// The name of the custom field.
     public var name: String?
     /// The value of the custom field.
@@ -379,7 +379,7 @@ public struct InvoiceCustomField: Codable {
     }
 }
 
-public struct InvoiceCustomerTaxId: Codable {
+public struct InvoiceCustomerTaxId: Codable, Sendable {
     /// The type of the tax ID
     public var type: TaxIDType?
     /// The value of the tax ID.
@@ -391,7 +391,7 @@ public struct InvoiceCustomerTaxId: Codable {
     }
 }
 
-public struct InvoiceFromInvoice: Codable {
+public struct InvoiceFromInvoice: Codable, Sendable {
     /// The relation between this invoice and the cloned invoice
     public var action: String?
     /// The invoice that was cloned.
@@ -403,7 +403,7 @@ public struct InvoiceFromInvoice: Codable {
     }
 }
 
-public struct InvoiceLastFinalizationError: Codable {
+public struct InvoiceLastFinalizationError: Codable, Sendable {
     /// The type of error returned. One of `api_connection_error`, `api_error`, `authentication_error`, `card_error`, `idempotency_error`, `invalid_request_error`, or `rate_limit_error`.
     public var type: StripeErrorType?
     /// For some errors that could be handled programmatically, a short string indicating the error code reported.
@@ -432,7 +432,7 @@ public struct InvoiceLastFinalizationError: Codable {
     }
 }
 
-public struct InvoicePaymentSettings: Codable {
+public struct InvoicePaymentSettings: Codable, Sendable {
     /// ID of the mandate to be used for this invoice. It must correspond to the payment method used to pay the invoice, including the invoice’s `default_payment_method` or `default_source`, if set.
     public var defaultMandate: String?
     /// Payment-method-specific configuration to provide to the invoice’s PaymentIntent.
@@ -449,7 +449,7 @@ public struct InvoicePaymentSettings: Codable {
     }
 }
 
-public struct InvoiceRenderingOptions: Codable {
+public struct InvoiceRenderingOptions: Codable, Sendable {
     /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
     public var amountTaxDisplay: String?
     
@@ -458,7 +458,7 @@ public struct InvoiceRenderingOptions: Codable {
     }
 }
 
-public struct InvoiceShippingCost: Codable {
+public struct InvoiceShippingCost: Codable, Sendable {
     /// Total shipping cost before any taxes are applied.
     public var amountSubtotal: Int?
     /// Total tax amount applied due to shipping costs. If no tax was applied, defaults to 0.
@@ -483,7 +483,7 @@ public struct InvoiceShippingCost: Codable {
     }
 }
 
-public struct InvoiceShippingCostTax: Codable {
+public struct InvoiceShippingCostTax: Codable, Sendable {
     /// Amount of tax applied for this rate.
     public var amount: Int?
     /// The tax rate applied.
@@ -504,7 +504,7 @@ public struct InvoiceShippingCostTax: Codable {
     }
 }
 
-public enum InvoiceShippingCostTaxTaxabilityReason: String, Codable {
+public enum InvoiceShippingCostTaxTaxabilityReason: String, Codable, Sendable {
     case vatExempt = "vat_exempt"
     case jurisdictionUnsupported = "jurisdiction_unsupported"
     case excludedTerritory = "excluded_territory"
@@ -525,7 +525,7 @@ public enum InvoiceShippingCostTaxTaxabilityReason: String, Codable {
     case proportionallyRated = "proportionally_rated"
 }
 
-public enum InvoiceStatus: String, Codable {
+public enum InvoiceStatus: String, Codable, Sendable {
     case draft
     case open
     case void
@@ -533,7 +533,7 @@ public enum InvoiceStatus: String, Codable {
     case uncollectible
 }
 
-public struct InvoiceStatusTransitions: Codable {
+public struct InvoiceStatusTransitions: Codable, Sendable {
     /// The time that the invoice draft was finalized.
     public var finalizedAt: Date?
     /// The time that the invoice was marked uncollectible.
@@ -554,7 +554,7 @@ public struct InvoiceStatusTransitions: Codable {
     }
 }
 
-public struct InvoiceThresholdReason: Codable {
+public struct InvoiceThresholdReason: Codable, Sendable {
     /// The total invoice amount threshold boundary if it triggered the threshold invoice.
     public var amountGte: Int?
     /// Indicates which line items triggered a threshold invoice.
@@ -566,7 +566,7 @@ public struct InvoiceThresholdReason: Codable {
     }
 }
 
-public struct InvoiceThresholdReasonItemReason: Codable {
+public struct InvoiceThresholdReasonItemReason: Codable, Sendable {
     /// The IDs of the line items that triggered the threshold invoice.
     public var lineItemIds: [String]?
     /// The quantity threshold boundary that applied to the given line item.
@@ -578,7 +578,7 @@ public struct InvoiceThresholdReasonItemReason: Codable {
     }
 }
 
-public struct InvoiceTotalTaxAmount: Codable {
+public struct InvoiceTotalTaxAmount: Codable, Sendable {
     /// The amount, in cents, of the tax.
     public var amount: Int?
     /// Whether this tax amount is inclusive or exclusive.
@@ -603,7 +603,7 @@ public struct InvoiceTotalTaxAmount: Codable {
     }
 }
 
-public enum InvoiceTotalTaxAmountTaxabilityReason: String, Codable {
+public enum InvoiceTotalTaxAmountTaxabilityReason: String, Codable, Sendable {
     /// Taxed at the standard rate.
     case standardRated = "standard_rated"
     /// Taxed at a reduced rate.
@@ -636,7 +636,7 @@ public enum InvoiceTotalTaxAmountTaxabilityReason: String, Codable {
     case proportionallyRated = "proportionally_rated"
 }
 
-public struct InvoiceTotalDiscountAmount: Codable {
+public struct InvoiceTotalDiscountAmount: Codable, Sendable {
     /// The amount, in cents, of the discount.
     public var amount: Int?
     /// The discount that was applied to get this discount amount.
@@ -648,7 +648,7 @@ public struct InvoiceTotalDiscountAmount: Codable {
     }
 }
 
-public struct InvoiceTransferData: Codable {
+public struct InvoiceTransferData: Codable, Sendable {
     /// The amount in cents that will be transferred to the destination account when the invoice is paid. By default, the entire amount is transferred to the destination.
     public var amount: Int?
     /// The account where funds from the payment will be transferred to upon payment success.
@@ -660,7 +660,7 @@ public struct InvoiceTransferData: Codable {
     }
 }
 
-public struct InvoiceList: Codable {
+public struct InvoiceList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

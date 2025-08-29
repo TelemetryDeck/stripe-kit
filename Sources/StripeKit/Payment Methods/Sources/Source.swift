@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Source Object](https://stripe.com/docs/api/sources/object).
-public struct Source: Codable {
+public struct Source: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -64,27 +64,27 @@ public struct Source: Codable {
     public var wechat: StripeSourceWechat?
 }
 
-public struct StripeSourceCodeVerification: Codable {
+public struct StripeSourceCodeVerification: Codable, Sendable {
     /// The number of attempts remaining to authenticate the source object with a verification code.
     public var attemptsRemaining: Int?
     /// The status of the code verification, either `pending` (awaiting verification, `attempts_remaining` should be greater than 0), `succeeded` (successful verification) or `failed` (failed verification, cannot be verified anymore as `attempts_remaining` should be 0).
     public var status: StripeSourceCodeVerificationStatus?
 }
 
-public enum StripeSourceCodeVerificationStatus: String, Codable {
+public enum StripeSourceCodeVerificationStatus: String, Codable, Sendable {
     case pending
     case succeeded
     case failed
 }
 
-public enum StripeSourceFlow: String, Codable {
+public enum StripeSourceFlow: String, Codable, Sendable {
     case redirect
     case receiver
     case codeVerification = "code_verification"
     case none
 }
 
-public struct StripeSourceOwner: Codable {
+public struct StripeSourceOwner: Codable, Sendable {
     /// Owner’s address.
     public var address: Address?
     /// Owner’s email address.
@@ -103,7 +103,7 @@ public struct StripeSourceOwner: Codable {
     public var verifiedPhone: String?
 }
 
-public struct StripeSourceReceiver: Codable {
+public struct StripeSourceReceiver: Codable, Sendable {
     /// The address of the receiver source. This is the value that should be communicated to the customer to send their funds to.
     public var address: String?
     /// The total amount that was charged by you. The amount charged is expressed in the source’s currency.
@@ -118,19 +118,19 @@ public struct StripeSourceReceiver: Codable {
     public var refundAttributesStatus: StripeSourceReceiverRefundAttributesStatus?
 }
 
-public enum StripeSourceReceiverRefundAttributesMethod: String, Codable {
+public enum StripeSourceReceiverRefundAttributesMethod: String, Codable, Sendable {
     case email
     case manual
     case none
 }
 
-public enum StripeSourceReceiverRefundAttributesStatus: String, Codable {
+public enum StripeSourceReceiverRefundAttributesStatus: String, Codable, Sendable {
     case missing
     case requested
     case available
 }
 
-public struct StripeSourceRedirect: Codable {
+public struct StripeSourceRedirect: Codable, Sendable {
     /// The failure reason for the redirect, either `user_abort` (the customer aborted or dropped out of the redirect flow), `declined` (the authentication failed or the transaction was declined), or `processing_error` (the redirect failed due to a technical error). Present only if the redirect status is `failed`.
     public var failureReason: StripeSourceRedirectFailureReason?
     /// The URL you provide to redirect the customer to after they authenticated their payment.
@@ -141,21 +141,21 @@ public struct StripeSourceRedirect: Codable {
     public var url: String?
 }
 
-public enum StripeSourceRedirectFailureReason: String, Codable {
+public enum StripeSourceRedirectFailureReason: String, Codable, Sendable {
     case userAbort = "user_abort"
     case declined
     case processingError = "processing_error"
     case failed
 }
 
-public enum StripeSourceRedirectReason: String, Codable {
+public enum StripeSourceRedirectReason: String, Codable, Sendable {
     case pending
     case succeeded
     case notRequired = "not_required"
     case failed
 }
 
-public enum StripeSourceStatus: String, Codable {
+public enum StripeSourceStatus: String, Codable, Sendable {
     case canceled
     case chargeable
     case consumed
@@ -163,7 +163,7 @@ public enum StripeSourceStatus: String, Codable {
     case pending
 }
 
-public enum StripeSourceType: String, Codable {
+public enum StripeSourceType: String, Codable, Sendable {
     case achCreditTransfer = "ach_credit_transfer"
     case achDebit = "ach_debit"
     case alipay
@@ -181,13 +181,13 @@ public enum StripeSourceType: String, Codable {
     case wechat
 }
 
-public enum StripeSourceUsage: String, Codable {
+public enum StripeSourceUsage: String, Codable, Sendable {
     case reusable
     case singleUse = "single_use"
 }
 
 // MARK: - Sources
-public struct StripeSourceACHCreditTransfer: Codable {
+public struct StripeSourceACHCreditTransfer: Codable, Sendable {
     public var accountNumber: String?
     public var bankName: String?
     public var fingerprint: String?
@@ -195,7 +195,7 @@ public struct StripeSourceACHCreditTransfer: Codable {
     public var swiftCode: String?
 }
 
-public struct StripeSourceACHDebit: Codable {
+public struct StripeSourceACHDebit: Codable, Sendable {
     public var bankName: String?
     public var country: String?
     public var fingerprint: String?
@@ -204,12 +204,12 @@ public struct StripeSourceACHDebit: Codable {
     public var type: String?
 }
 
-public struct StripeSourceAlipay: Codable {
+public struct StripeSourceAlipay: Codable, Sendable {
     public var nativeUrl: String?
     public var statementDescriptor: String?
 }
 
-public struct StripeSourceBancontact: Codable {
+public struct StripeSourceBancontact: Codable, Sendable {
     public var bankCode: String?
     public var bankName: String?
     public var bic: String?
@@ -217,7 +217,7 @@ public struct StripeSourceBancontact: Codable {
     public var preferredLanguage: String?
 }
 
-public struct StripeSourceCard: Codable {
+public struct StripeSourceCard: Codable, Sendable {
     public var addressLine1Check: String?
     public var addressZipCheck: String?
     public var brand: CardBrand?
@@ -234,7 +234,7 @@ public struct StripeSourceCard: Codable {
     public var tokenizationMethod: String?
 }
 
-public struct StripeSourceCardPresent: Codable {
+public struct StripeSourceCardPresent: Codable, Sendable {
     public var applicationCryptogram: String?
     public var applicationPreferredName: String?
     public var authorizationCode: String?
@@ -260,33 +260,33 @@ public struct StripeSourceCardPresent: Codable {
     public var transactionStatusInformation: String?
 }
 
-public struct StripeSourceEPS: Codable {
+public struct StripeSourceEPS: Codable, Sendable {
     // The Eps sources do not have any specific property today.
     // The only ones available in the spec are for private betas.
 }
 
-public struct StripeSourceGiropay: Codable {
+public struct StripeSourceGiropay: Codable, Sendable {
     public var bankCode: String?
     public var bic: String?
     public var bankName: String?
 }
 
-public struct StripeSourceIDEAL: Codable {
+public struct StripeSourceIDEAL: Codable, Sendable {
     public var bank: String?
     public var bic: String?
     public var ibanLast4: String?
 }
 
-public struct StripeSourceMultibanco: Codable {
+public struct StripeSourceMultibanco: Codable, Sendable {
     public var entity: String?
     public var reference: String?
 }
 
-public struct StripeSourceP24: Codable {
+public struct StripeSourceP24: Codable, Sendable {
     public var reference: String?
 }
 
-public struct StripeSourceSepaDebit: Codable {
+public struct StripeSourceSepaDebit: Codable, Sendable {
     public var bankCode: String?
     public var branchCode: String?
     public var country: String?
@@ -296,7 +296,7 @@ public struct StripeSourceSepaDebit: Codable {
     public var mandateUrl: String?
 }
 
-public struct StripeSourceSofort: Codable {
+public struct StripeSourceSofort: Codable, Sendable {
     public var bankCode: String?
     public var bankName: String?
     public var bic: String?
@@ -305,7 +305,7 @@ public struct StripeSourceSofort: Codable {
     public var verifiedName: String?
 }
 
-public struct StripeSourceThreeDSecure: Codable {
+public struct StripeSourceThreeDSecure: Codable, Sendable {
     public var addressLine1Check: String?
     public var addressZipCheck: String?
     public var authenticated: Bool?
@@ -324,19 +324,19 @@ public struct StripeSourceThreeDSecure: Codable {
     public var tokenizationMethod: CardTokenizedMethod?
 }
 
-public enum StripeSourceThreeDSecureSupportStatus: String, Codable {
+public enum StripeSourceThreeDSecureSupportStatus: String, Codable, Sendable {
     case notSupported = "not_supported"
     case required
     case recommended
     case optional
 }
 
-public struct StripeSourceWechat: Codable {
+public struct StripeSourceWechat: Codable, Sendable {
     // Stripe has no offocial documentation details
     /// https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-wechat
 }
 
-public struct StripeSourcesList: Codable {
+public struct StripeSourcesList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

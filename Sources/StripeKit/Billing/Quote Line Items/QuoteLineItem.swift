@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct QuoteLineItem: Codable {
+public struct QuoteLineItem: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -62,7 +62,7 @@ public struct QuoteLineItem: Codable {
     }
 }
 
-public struct QuoteLineItemDiscount: Codable {
+public struct QuoteLineItemDiscount: Codable, Sendable {
     /// The amount discounted.
     public var amount: Int?
     /// The discount applied.
@@ -74,7 +74,7 @@ public struct QuoteLineItemDiscount: Codable {
     }
 }
 
-public struct QuoteLineItemTax: Codable {
+public struct QuoteLineItemTax: Codable, Sendable {
     /// Amount of tax applied for this rate.
     public var amount: Int?
     /// The tax rate applied.
@@ -91,7 +91,7 @@ public struct QuoteLineItemTax: Codable {
     }
 }
 
-public enum QuoteLineItemTaxTaxabilityReason: String, Codable {
+public enum QuoteLineItemTaxTaxabilityReason: String, Codable, Sendable {
     case vatExempt = "vat_exempt"
     case jurisdictionUnsupported = "jurisdiction_unsupported"
     case excludedTerritory = "excluded_territory"
@@ -112,7 +112,7 @@ public enum QuoteLineItemTaxTaxabilityReason: String, Codable {
     case proportionallyRated = "proportionally_rated"
 }
 
-public struct QuoteLineItemList: Codable {
+public struct QuoteLineItemList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

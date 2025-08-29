@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Customer Object](https://stripe.com/docs/api/customers/object)
-public struct Customer: Codable {
+public struct Customer: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The customers address.
@@ -124,7 +124,7 @@ public struct Customer: Codable {
     }
 }
 
-public struct CustomerCashBalance: Codable {
+public struct CustomerCashBalance: Codable, Sendable {
     /// String representing the object’s type. Objects of the same type share the same value.
     public var object: String
     /// A hash of all cash balances available to this customer. You cannot delete a customer with any cash balances, even if the balance is 0. Amounts are represented in the smallest currency unit.
@@ -149,7 +149,7 @@ public struct CustomerCashBalance: Codable {
     }
 }
 
-public struct CustomerCashBalanceSettings: Codable {
+public struct CustomerCashBalanceSettings: Codable, Sendable {
     /// The configuration for how funds that land in the customer cash balance are reconciled
     public var reconciliationMode: String?
     /// A flag to indicate if reconciliation mode returned is the user’s default or is specific to this customer cash balance
@@ -161,7 +161,7 @@ public struct CustomerCashBalanceSettings: Codable {
     }
 }
 
-public struct CustomerInvoiceSettings: Codable {
+public struct CustomerInvoiceSettings: Codable, Sendable {
     /// Default custom fields to be displayed on invoices for this customer.
     public var customFields: [CustomerInvoiceSettingsCustomFields]?
     /// ID of the default payment method used for subscriptions and invoices for the customer.
@@ -182,7 +182,7 @@ public struct CustomerInvoiceSettings: Codable {
     }
 }
 
-public struct CustomerInvoiceSettingsCustomFields: Codable {
+public struct CustomerInvoiceSettingsCustomFields: Codable, Sendable {
     /// The name of the custom field.
     public var name: String?
     /// The value of the custom field.
@@ -194,7 +194,7 @@ public struct CustomerInvoiceSettingsCustomFields: Codable {
     }
 }
 
-public struct CustomerInvoiceSettingsRenderingOptions: Codable {
+public struct CustomerInvoiceSettingsRenderingOptions: Codable, Sendable {
     /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
     public var amountTaxDisplay: String?
     
@@ -203,13 +203,13 @@ public struct CustomerInvoiceSettingsRenderingOptions: Codable {
     }
 }
 
-public enum CustomerTaxExempt: String, Codable {
+public enum CustomerTaxExempt: String, Codable, Sendable {
     case none
     case exempt
     case reverse
 }
 
-public struct CustomerList: Codable {
+public struct CustomerList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?
@@ -226,7 +226,7 @@ public struct CustomerList: Codable {
     }
 }
 
-public struct CustomerSearchResult: Codable {
+public struct CustomerSearchResult: Codable, Sendable {
     /// A string describing the object type returned.
     public var object: String
     /// A list of customers, paginated by any request parameters.

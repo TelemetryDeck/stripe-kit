@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Credit Note Line Item](https://stripe.com/docs/api/credit_notes/line_item)
-public struct CreditNoteLineItem: Codable {
+public struct CreditNoteLineItem: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -73,7 +73,7 @@ public struct CreditNoteLineItem: Codable {
     }
 }
 
-public struct CreditNoteLineItemDiscountAmount: Codable {
+public struct CreditNoteLineItemDiscountAmount: Codable, Sendable {
     /// The amount, in cents, of the discount.
     public var amount: Int?
     /// The discount that was applied to get this discount amount.
@@ -85,7 +85,7 @@ public struct CreditNoteLineItemDiscountAmount: Codable {
     }
 }
 
-public struct CreditNoteLineItemTaxAmount: Codable {
+public struct CreditNoteLineItemTaxAmount: Codable, Sendable {
     /// The amount, in cents, of the tax.
     public var amount: Int?
     /// Whether this tax amount is inclusive or exclusive.
@@ -102,12 +102,12 @@ public struct CreditNoteLineItemTaxAmount: Codable {
     }
 }
 
-public enum CreditNoteLineItemType: String, Codable {
+public enum CreditNoteLineItemType: String, Codable, Sendable {
     case invoiceLineItem = "invoice_line_item"
     case customLineItem = "custom_line_item"
 }
 
-public struct CreditNoteLineItemList: Codable {
+public struct CreditNoteLineItemList: Codable, Sendable {
     /// String representing the object’s type. Objects of the same type share the same value. Always has the value list.
     public var object: String?
     /// Details about each object.

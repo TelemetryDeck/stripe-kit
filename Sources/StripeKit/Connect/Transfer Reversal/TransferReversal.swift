@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Transfer Reversal Object](https://stripe.com/docs/api/transfer_reversals/object) .
-public struct TransferReversal: Codable {
+public struct TransferReversal: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Amount, in cents.
@@ -53,7 +53,7 @@ public struct TransferReversal: Codable {
     }
 }
 
-public struct TransferReversalList: Codable {
+public struct TransferReversalList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

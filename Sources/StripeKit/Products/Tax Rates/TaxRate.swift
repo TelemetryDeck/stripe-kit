@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Tax Rate Object](https://stripe.com/docs/api/tax_rates/object)
-public struct TaxRate: Codable {
+public struct TaxRate: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Defaults to true. When set to false, this tax rate cannot be applied to objects in the API, but will still be applied to subscriptions and invoices that already have it set.
@@ -69,12 +69,12 @@ public struct TaxRate: Codable {
     }
 }
 
-public enum TaxRateTaxType: String, Codable {
+public enum TaxRateTaxType: String, Codable, Sendable {
     case vat
     case salesTax = "sales_tax"
 }
 
-public struct TaxRateList: Codable {
+public struct TaxRateList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

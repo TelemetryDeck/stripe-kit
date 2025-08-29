@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Discount Object](https://stripe.com/docs/api/discounts/object)
-public struct Discount: Codable {
+public struct Discount: Codable, Sendable {
     /// The ID of the discount object. Discounts cannot be fetched by ID. Use expand[]=discounts in API calls to expand discount IDs in an array.
     public var id: String
     /// Hash describing the coupon applied to create this discount.

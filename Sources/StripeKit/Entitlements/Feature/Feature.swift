@@ -11,7 +11,7 @@ import Foundation
 ///
 /// A feature represents a monetizable ability or functionality in your system. Features can be assigned to products, and when those products are purchased, Stripe will create an entitlement to the
 /// feature for the purchasing customer.
-public struct Feature: Codable {
+public struct Feature: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// A unique key you provide as your own system identifier. This may be up to 80 characters.
@@ -28,7 +28,7 @@ public struct Feature: Codable {
     public var livemode: Bool?
 }
 
-public struct FeatureList: Codable {
+public struct FeatureList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct UsageRecord: Codable {
+public struct UsageRecord: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -36,12 +36,12 @@ public struct UsageRecord: Codable {
     }
 }
 
-public enum UsageRecordAction: String, Codable {
+public enum UsageRecordAction: String, Codable, Sendable {
     case set
     case increment
 }
 
-public struct UsageRecordSummary: Codable {
+public struct UsageRecordSummary: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object's type. Objects of the same type share the same value.
@@ -74,7 +74,7 @@ public struct UsageRecordSummary: Codable {
     }
 }
 
-public struct UsageRecordSummaryPeriod: Codable {
+public struct UsageRecordSummaryPeriod: Codable, Sendable {
     /// The end date of this usage period. All usage up to and including this point in time is included.
     public var end: Date?
     /// The start date of this usage period. All usage after this point in time is included.
@@ -86,7 +86,7 @@ public struct UsageRecordSummaryPeriod: Codable {
     }
 }
 
-public struct UsageRecordSummaryList: Codable {
+public struct UsageRecordSummaryList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

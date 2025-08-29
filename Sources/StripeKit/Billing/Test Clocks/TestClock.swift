@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TestClock: Codable {
+public struct TestClock: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -44,7 +44,7 @@ public struct TestClock: Codable {
     }
 }
 
-public enum TestClockStatus: String, Codable {
+public enum TestClockStatus: String, Codable, Sendable {
     /// All test clock objects have advanced to the `frozen_time`.
     case ready
     /// In the process of advancing time for the test clock objects.
@@ -53,7 +53,7 @@ public enum TestClockStatus: String, Codable {
     case intervalFailure = "interval_failure"
 }
 
-public struct TestClockList: Codable {
+public struct TestClockList: Codable, Sendable {
     /// A string describing the object type returned.
     public var object: String
     /// A list of Test Clocks, paginated by any request parameters.

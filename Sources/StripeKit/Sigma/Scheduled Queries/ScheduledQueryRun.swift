@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Scheduled Query Run Object](https://stripe.com/docs/api/sigma/scheduled_queries/object)
-public struct ScheduledQueryRun: Codable {
+public struct ScheduledQueryRun: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// When the query was run, Sigma contained a snapshot of your Stripe data at this time.
@@ -57,7 +57,7 @@ public struct ScheduledQueryRun: Codable {
     }
 }
 
-public struct ScheduledQueryRunList: Codable {
+public struct ScheduledQueryRunList: Codable, Sendable {
     public var object: String
     public var data: [ScheduledQueryRun]?
     public var hasMore: Bool?
@@ -74,7 +74,7 @@ public struct ScheduledQueryRunList: Codable {
     }
 }
 
-public struct ScheduledQueryRunError: Codable {
+public struct ScheduledQueryRunError: Codable, Sendable {
     /// Information about the run failure.
     public var message: String?
     
@@ -83,7 +83,7 @@ public struct ScheduledQueryRunError: Codable {
     }
 }
 
-public enum ScheduledQueryRunStatus: String, Codable {
+public enum ScheduledQueryRunStatus: String, Codable, Sendable {
     case completed
     case canceled
     case failed

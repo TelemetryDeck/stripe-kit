@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SetupAttemptPaymentMethodDetails: Codable {
+public struct SetupAttemptPaymentMethodDetails: Codable, Sendable {
     /// If this is a `acss_debit` payment method, this hash contains confirmation-specific information for the `acss_debit` payment method.
     public var acssDebit: SetupAttemptPaymentMethodDetailsACSSDebit?
     /// If this is a `au_becs_debit` payment method, this hash contains confirmation-specific information for the `au_becs_debit` payment method.
@@ -78,22 +78,22 @@ public struct SetupAttemptPaymentMethodDetails: Codable {
 
 
 // MARK: ACSS Debit
-public struct SetupAttemptPaymentMethodDetailsACSSDebit: Codable {
+public struct SetupAttemptPaymentMethodDetailsACSSDebit: Codable, Sendable {
     public init() {}
 }
 
 // MARK: AUBecsDebit
-public struct SetupAttemptPaymentMethodDetailsAuBecsDebit: Codable {
+public struct SetupAttemptPaymentMethodDetailsAuBecsDebit: Codable, Sendable {
     public init() {}
 }
 
 // MARK: BacsDebit
-public struct SetupAttemptPaymentMethodDetailsBacsDebit: Codable {
+public struct SetupAttemptPaymentMethodDetailsBacsDebit: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Bancontact
-public struct SetupAttemptPaymentMethodDetailsBancontact: Codable {
+public struct SetupAttemptPaymentMethodDetailsBancontact: Codable, Sendable {
     /// Bank code of bank associated with the bank account.
     public var bankCode: String?
     /// Name of the bank associated with the bank account.
@@ -130,7 +130,7 @@ public struct SetupAttemptPaymentMethodDetailsBancontact: Codable {
     }
 }
 
-public enum SetupAttemptPaymentMethodDetailsBancontactPreferredLanguage: String, Codable {
+public enum SetupAttemptPaymentMethodDetailsBancontactPreferredLanguage: String, Codable, Sendable {
     case en
     case de
     case fr
@@ -138,24 +138,24 @@ public enum SetupAttemptPaymentMethodDetailsBancontactPreferredLanguage: String,
 }
 
 // MARK: Blik
-public struct SetupAttemptPaymentMethodDetailsBlik: Codable {
+public struct SetupAttemptPaymentMethodDetailsBlik: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Boleto
-public struct SetupAttemptPaymentMethodDetailsBoleto: Codable {
+public struct SetupAttemptPaymentMethodDetailsBoleto: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Card
-public struct SetupAttemptPaymentMethodDetailsCard: Codable {
+public struct SetupAttemptPaymentMethodDetailsCard: Codable, Sendable {
     /// Check results by Card networks on Card address and CVC at time of payment.
     public var checks: SetupAttemptPaymentMethodDetailsCardChecks?
     /// Populated if this authorization used 3D Secure authentication.
     public var threeDSecure: SetupAttemptPaymentMethodDetailsCardThreeDSecure?
 }
 
-public struct SetupAttemptPaymentMethodDetailsCardChecks: Codable {
+public struct SetupAttemptPaymentMethodDetailsCardChecks: Codable, Sendable {
     /// If a address line1 was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
     public var addressLine1Check: SetupAttemptPaymentMethodDetailsCardCheck?
     /// If a address postal code was provided, results of the check, one of `pass`, `fail`, `unavailable`, or `unchecked`.
@@ -172,14 +172,14 @@ public struct SetupAttemptPaymentMethodDetailsCardChecks: Codable {
     }
 }
 
-public enum SetupAttemptPaymentMethodDetailsCardCheck: String, Codable {
+public enum SetupAttemptPaymentMethodDetailsCardCheck: String, Codable, Sendable {
     case pass
     case fail
     case unavailable
     case unchecked
 }
 
-public struct SetupAttemptPaymentMethodDetailsCardThreeDSecure: Codable {
+public struct SetupAttemptPaymentMethodDetailsCardThreeDSecure: Codable, Sendable {
     /// For authenticated transactions: how the customer was authenticated by the issuing bank.
     public var authenticationFlow: SetupAttemptPaymentMethodDetailsCardThreeDSecureAuthenticationFlow?
     /// Indicates the outcome of 3D Secure authentication.
@@ -190,14 +190,14 @@ public struct SetupAttemptPaymentMethodDetailsCardThreeDSecure: Codable {
     public var version: String?
 }
 
-public enum SetupAttemptPaymentMethodDetailsCardThreeDSecureAuthenticationFlow: String, Codable {
+public enum SetupAttemptPaymentMethodDetailsCardThreeDSecureAuthenticationFlow: String, Codable, Sendable {
     /// The issuing bank authenticated the customer by presenting a traditional challenge window.
     case challenge
     /// The issuing bank authenticated the customer via the 3DS2 frictionless flow.
     case frictionless
 }
 
-public enum SetupAttemptPaymentMethodDetailsCardThreeDSecureResult: String, Codable {
+public enum SetupAttemptPaymentMethodDetailsCardThreeDSecureResult: String, Codable, Sendable {
     /// 3D Secure authentication succeeded.
     case authenticated
     /// The issuing bank does not support 3D Secure, has not set up 3D Secure for the card, or is experiencing an outage. No authentication was peformed, but the card network has provided proof of the attempt.
@@ -213,7 +213,7 @@ public enum SetupAttemptPaymentMethodDetailsCardThreeDSecureResult: String, Coda
     case processingError = "processing_error"
 }
 
-public enum SetupAttemptPaymentMethodDetailsCardThreeDSecureResultReason: String, Codable {
+public enum SetupAttemptPaymentMethodDetailsCardThreeDSecureResultReason: String, Codable, Sendable {
     /// For `not_supported`. The issuing bank does not support 3D Secure or has not set up 3D Secure for the card, and the card network did not provide proof of the attempt.
     /// This occurs when running 3D Secure on certain kinds of prepaid cards and in rare cases where the issuing bank is exempt from the requirement to support 3D Secure.
     case cardNotEnrolled = "card_not_enrolled"
@@ -232,7 +232,7 @@ public enum SetupAttemptPaymentMethodDetailsCardThreeDSecureResultReason: String
 }
 
 // MARK: Card Present
-public struct SetupAttemptPaymentMethodDetailsCardPresent: Codable {
+public struct SetupAttemptPaymentMethodDetailsCardPresent: Codable, Sendable {
     /// The ID of the Card PaymentMethod which was generated by this SetupAttempt.
     @Expandable<Card> public var generatedCard: String?
     
@@ -243,12 +243,12 @@ public struct SetupAttemptPaymentMethodDetailsCardPresent: Codable {
 
 // MARK: Cashapp
 
-public struct StripeSetupAttemptPaymentMethodDetailsCashapp: Codable {
+public struct StripeSetupAttemptPaymentMethodDetailsCashapp: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Ideal
-public struct SetupAttemptPaymentMethodDetailsIdeal: Codable {
+public struct SetupAttemptPaymentMethodDetailsIdeal: Codable, Sendable {
     /// The customer’s bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, `van_lanschot` or `yourself`.
     public var bank: SetupAttemptPaymentMethodDetailsIdealBank?
     /// The Bank Identifier Code of the customer’s bank.
@@ -277,7 +277,7 @@ public struct SetupAttemptPaymentMethodDetailsIdeal: Codable {
     }
 }
 
-public enum SetupAttemptPaymentMethodDetailsIdealBank: String, Codable {
+public enum SetupAttemptPaymentMethodDetailsIdealBank: String, Codable, Sendable {
     case abnAmro = "abn_amro"
     case asnBank = "asn_bank"
     case bunq
@@ -295,22 +295,22 @@ public enum SetupAttemptPaymentMethodDetailsIdealBank: String, Codable {
 }
 
 // MARK: Klarna
-public struct SetupAttemptPaymentMethodDetailsKlarna: Codable {
+public struct SetupAttemptPaymentMethodDetailsKlarna: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Link
-public struct SetupAttemptPaymentMethodDetailsLink: Codable {
+public struct SetupAttemptPaymentMethodDetailsLink: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Sepa Debit
-public struct SetupAttemptPaymentMethodDetailsSepaDebit: Codable {
+public struct SetupAttemptPaymentMethodDetailsSepaDebit: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Sofort
-public struct SetupAttemptPaymentMethodDetailsSofort: Codable {
+public struct SetupAttemptPaymentMethodDetailsSofort: Codable, Sendable {
     /// Bank code of bank associated with the bank account.
     public var bankCode: String?
     /// Name of the bank associated with the bank account.
@@ -347,7 +347,7 @@ public struct SetupAttemptPaymentMethodDetailsSofort: Codable {
     }
 }
 
-public enum SetupAttemptPaymentMethodDetailsSofortPreferredLanguage: String, Codable {
+public enum SetupAttemptPaymentMethodDetailsSofortPreferredLanguage: String, Codable, Sendable {
     case en
     case de
     case fr
@@ -355,6 +355,6 @@ public enum SetupAttemptPaymentMethodDetailsSofortPreferredLanguage: String, Cod
 }
 
 // MARK: US Bank Account
-public struct SetupAttemptPaymentMethodDetailsUSBankAccount: Codable {
+public struct SetupAttemptPaymentMethodDetailsUSBankAccount: Codable, Sendable {
     public init() {}
 }

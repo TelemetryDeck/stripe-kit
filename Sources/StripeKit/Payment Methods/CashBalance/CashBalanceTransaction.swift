@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CashBalanceTransaction: Codable {
+public struct CashBalanceTransaction: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -64,7 +64,7 @@ public struct CashBalanceTransaction: Codable {
     }
 }
 
-public struct CashBalanceTransactionAppliedToPayment: Codable {
+public struct CashBalanceTransactionAppliedToPayment: Codable, Sendable {
     /// The Payment Intent that funds were applied to.
     @Expandable<PaymentIntent> public var paymentIntent: String?
     
@@ -73,7 +73,7 @@ public struct CashBalanceTransactionAppliedToPayment: Codable {
     }
 }
 
-public struct CashBalanceTransactionFunded: Codable {
+public struct CashBalanceTransactionFunded: Codable, Sendable {
     /// Information about the bank transfer that funded the customer’s cash balance.
     public var bankTransfer: CashBalanceTransactionFundedBankTransfer?
     
@@ -82,7 +82,7 @@ public struct CashBalanceTransactionFunded: Codable {
     }
 }
 
-public struct CashBalanceTransactionFundedBankTransfer: Codable {
+public struct CashBalanceTransactionFundedBankTransfer: Codable, Sendable {
     /// EU-specific details of the bank transfer.
     public var euBankTransfer: CashBalanceTransactionFundedBankTransferEUBankTransfer?
     /// The user-supplied reference field on the bank transfer.
@@ -99,7 +99,7 @@ public struct CashBalanceTransactionFundedBankTransfer: Codable {
     }
 }
 
-public enum CashBalanceTransactionFundedBankTransferType: String, Codable {
+public enum CashBalanceTransactionFundedBankTransferType: String, Codable, Sendable {
     /// A bank transfer of type `eu_bank_transfer`
     case euBankTransfer = "eu_bank_transfer"
     /// A bank transfer of type `gb_bank_transfer`
@@ -110,7 +110,7 @@ public enum CashBalanceTransactionFundedBankTransferType: String, Codable {
     case mxBankTransfer = "mx_bank_transfer"
 }
 
-public struct CashBalanceTransactionFundedBankTransferEUBankTransfer: Codable {
+public struct CashBalanceTransactionFundedBankTransferEUBankTransfer: Codable, Sendable {
     /// The BIC of the bank of the sender of the funding.
     public var bic: String?
     /// The last 4 digits of the IBAN of the sender of the funding.
@@ -127,7 +127,7 @@ public struct CashBalanceTransactionFundedBankTransferEUBankTransfer: Codable {
     }
 }
 
-public struct CashBalanceTransactionRefundedFromPayment: Codable {
+public struct CashBalanceTransactionRefundedFromPayment: Codable, Sendable {
     /// The Refund that moved these funds into the customer’s cash balance.
     @Expandable<Refund> public var refund: String?
     
@@ -136,7 +136,7 @@ public struct CashBalanceTransactionRefundedFromPayment: Codable {
     }
 }
 
-public struct CashBalanceTransactionUnappliedFromPayment: Codable {
+public struct CashBalanceTransactionUnappliedFromPayment: Codable, Sendable {
     /// The Payment Intent that funds were unapplied from.
     @Expandable<PaymentIntent> public var paymentIntent: String?
     
@@ -145,7 +145,7 @@ public struct CashBalanceTransactionUnappliedFromPayment: Codable {
     }
 }
 
-public struct CashBalanceTransactionList: Codable {
+public struct CashBalanceTransactionList: Codable, Sendable {
     /// String representing the object’s type. Objects of the same type share the same value. Always has the value list.
     public var object: String
     /// An array of `CashBalanceTransaction`s associated with the account.

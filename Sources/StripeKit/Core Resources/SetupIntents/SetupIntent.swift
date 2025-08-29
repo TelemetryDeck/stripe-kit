@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [SetupIntent Object](https://stripe.com/docs/api/setup_intents/object) .
-public struct SetupIntent: Codable {
+public struct SetupIntent: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The client secret of this SetupIntent. Used for client-side retrieval using a publishable key. The client secret can be used to complete payment setup from your frontend. It should not be stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.
@@ -112,13 +112,13 @@ public struct SetupIntent: Codable {
     }
 }
 
-public enum SetupIntentCancellationReason: String, Codable {
+public enum SetupIntentCancellationReason: String, Codable, Sendable {
     case abandoned
     case requestedByCustomer = "requested_by_customer"
     case duplicate
 }
 
-public struct SetupIntentNextAction: Codable {
+public struct SetupIntentNextAction: Codable, Sendable {
     /// The field that contains Cash App Pay QR code info
     public var cashappHandleRedirectOrDisplayQrCode: SetupIntentNextActionCashappHandleRedirectOrDisplayQrCode?
     /// Contains instructions for authenticating by redirecting your customer to another page or application.
@@ -139,7 +139,7 @@ public struct SetupIntentNextAction: Codable {
     }
 }
 
-public struct SetupIntentNextActionCashappHandleRedirectOrDisplayQrCode: Codable {
+public struct SetupIntentNextActionCashappHandleRedirectOrDisplayQrCode: Codable, Sendable {
     /// The URL to the hosted Cash App Pay instructions page, which allows customers to view the QR code, and supports QR code refreshing on expiration.
     public var hostedInstructionsUrl: String?
     /// The url for mobile redirect based auth
@@ -156,7 +156,7 @@ public struct SetupIntentNextActionCashappHandleRedirectOrDisplayQrCode: Codable
     }
 }
 
-public struct SetupIntentNextActionCashappQrCode: Codable {
+public struct SetupIntentNextActionCashappQrCode: Codable, Sendable {
     /// The date (unix timestamp) when the QR code expires.
     public var expiresAt: Date?
     /// The `image_url_png` string used to render QR code
@@ -173,7 +173,7 @@ public struct SetupIntentNextActionCashappQrCode: Codable {
     }
 }
 
-public struct SetupIntentNextActionRedirectToUrl: Codable {
+public struct SetupIntentNextActionRedirectToUrl: Codable, Sendable {
     /// If the customer does not exit their browser while authenticating, they will be redirected to this specified URL after completion.
     public var returnUrl: String?
     /// The URL you must redirect your customer to in order to authenticate the payment.
@@ -185,7 +185,7 @@ public struct SetupIntentNextActionRedirectToUrl: Codable {
     }
 }
 
-public enum SetupIntentNextActionType: String, Codable {
+public enum SetupIntentNextActionType: String, Codable, Sendable {
     case redirectToUrl = "redirect_to_url"
     case useStripeSDK = "use_stripe_sdk"
     case alipayHandleRedirect = "alipay_handle_redirect"
@@ -193,7 +193,7 @@ public enum SetupIntentNextActionType: String, Codable {
     case verifyWithMicrodeposits = "verify_with_microdeposits"
 }
 
-public struct SetupIntentNextActionVerifyMicroDeposits: Codable {
+public struct SetupIntentNextActionVerifyMicroDeposits: Codable, Sendable {
     /// The timestamp when the microdeposits are expected to land.
     public var arrivalDate: Date?
     /// The URL for the hosted verification page, which allows customers to verify their bank account.
@@ -210,12 +210,12 @@ public struct SetupIntentNextActionVerifyMicroDeposits: Codable {
     }
 }
 
-public enum SetupIntentNextActionVerifyMicroDepositType: String, Codable {
+public enum SetupIntentNextActionVerifyMicroDepositType: String, Codable, Sendable {
     case descriptorCode = "descriptor_code"
     case amounts
 }
 
-public struct SetupIntentAutomaticPaymentMethods: Codable {
+public struct SetupIntentAutomaticPaymentMethods: Codable, Sendable {
     /// Automatically calculates compatible payment methods
     public var enabled: Bool?
     
@@ -224,7 +224,7 @@ public struct SetupIntentAutomaticPaymentMethods: Codable {
     }
 }
 
-public enum SetupIntentStatus: String, Codable {
+public enum SetupIntentStatus: String, Codable, Sendable {
     case requiresPaymentMethod = "requires_payment_method"
     case requiresConfirmation = "requires_confirmation"
     case requiresAction = "requires_action"
@@ -233,7 +233,7 @@ public enum SetupIntentStatus: String, Codable {
     case succeeded
 }
 
-public struct SetupIntentsList: Codable {
+public struct SetupIntentsList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

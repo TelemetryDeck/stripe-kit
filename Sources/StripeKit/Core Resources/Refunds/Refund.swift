@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Refund Object](https://stripe.com/docs/api/refunds/object) .
-public struct Refund: Codable {
+public struct Refund: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Amount, in cents.
@@ -90,7 +90,7 @@ public struct Refund: Codable {
     }
 }
 
-public enum RefundFailureReason: String, Codable {
+public enum RefundFailureReason: String, Codable, Sendable {
     case lostOrStolenCard = "lost_or_stolen_card"
     case expiredOrCanceledCard = "expired_or_canceled_card"
     case chargeForPendingRefundDisputed = "charge_for_pending_refund_disputed"
@@ -100,21 +100,21 @@ public enum RefundFailureReason: String, Codable {
     case unknown
 }
 
-public enum RefundStatus: String, Codable {
+public enum RefundStatus: String, Codable, Sendable {
     case pending
     case succeeded
     case failed
     case canceled
 }
 
-public enum RefundReason: String, Codable {
+public enum RefundReason: String, Codable, Sendable {
     case duplicate
     case fraudulent
     case requestedByCustomer = "requested_by_customer"
     case expiredUncapturedCharge = "expired_uncaptured_charge"
 }
 
-public struct RefundNextAction: Codable {
+public struct RefundNextAction: Codable, Sendable {
     /// Contains the refund details.
     public var displayDetails: RefundNextActionDisplayDetails?
     /// Type of the next action to perform.
@@ -127,7 +127,7 @@ public struct RefundNextAction: Codable {
     }
 }
 
-public struct RefundNextActionDisplayDetails: Codable {
+public struct RefundNextActionDisplayDetails: Codable, Sendable {
     /// Contains information about the email sent to the customer.
     public var emailSent: RefundNextActionDisplayDetailsEmailSent?
     /// The expiry timestamp.
@@ -140,7 +140,7 @@ public struct RefundNextActionDisplayDetails: Codable {
     }
 }
 
-public struct RefundNextActionDisplayDetailsEmailSent: Codable {
+public struct RefundNextActionDisplayDetailsEmailSent: Codable, Sendable {
     /// The timestamp when the email was sent.
     public var emailSentAt: Date?
     /// The recipient’s email address.
@@ -153,7 +153,7 @@ public struct RefundNextActionDisplayDetailsEmailSent: Codable {
     }
 }
 
-public struct RefundsList: Codable {
+public struct RefundsList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

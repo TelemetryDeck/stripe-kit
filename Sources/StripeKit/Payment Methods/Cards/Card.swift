@@ -7,7 +7,7 @@
 //
 
 /// You can store multiple cards on a customer in order to charge the customer later. You can also store multiple debit cards on a recipient in order to transfer to those cards later.
-public struct Card: Codable {
+public struct Card: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// City/District/Suburb/Town/Village.
@@ -124,14 +124,14 @@ public struct Card: Codable {
     }
 }
 
-public enum CardValidationCheck: String, Codable {
+public enum CardValidationCheck: String, Codable, Sendable {
     case pass
     case fail
     case unavailable
     case unchecked
 }
 
-public enum CardBrand: String, Codable {
+public enum CardBrand: String, Codable, Sendable {
     case americanExpress = "American Express"
     case dinersClub = "Diners Club"
     case discover = "Discover"
@@ -144,21 +144,21 @@ public enum CardBrand: String, Codable {
     case unknown = "Unknown"
 }
 
-public enum CardFundingType: String, Codable {
+public enum CardFundingType: String, Codable, Sendable {
     case credit
     case debit
     case prepaid
     case unknown
 }
 
-public enum CardTokenizedMethod: String, Codable {
+public enum CardTokenizedMethod: String, Codable, Sendable {
     case androidPay = "android_pay"
     case applePay = "apple_pay"
     case masterpass
     case visaCheckout = "visa_checkout"
 }
 
-public struct CardWallet: Codable {
+public struct CardWallet: Codable, Sendable {
     /// If this is an `apple_pay` card wallet, this hash contains details about the wallet.
     public var applePay: CardWalletApplePay?
     /// The type of the card wallet, one of `apple_pay`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
@@ -170,7 +170,7 @@ public struct CardWallet: Codable {
     }
 }
 
-public struct CardWalletApplePay: Codable {
+public struct CardWalletApplePay: Codable, Sendable {
     public var type: String?
     
     public init(type: String? = nil) {
@@ -178,7 +178,7 @@ public struct CardWalletApplePay: Codable {
     }
 }
 
-public struct CardList: Codable {
+public struct CardList: Codable, Sendable {
     /// String representing the object’s type. Objects of the same type share the same value. Always has the value list.
     public var object: String
     /// An array of `Card`s associated with the account.

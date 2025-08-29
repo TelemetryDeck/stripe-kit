@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Plan Object](https://stripe.com/docs/api/plans/object).
-public struct Plan: Codable {
+public struct Plan: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Whether the plan is currently available for new subscriptions.
@@ -94,26 +94,26 @@ public struct Plan: Codable {
     }
 }
 
-public enum PlanAggregateUsage: String, Codable {
+public enum PlanAggregateUsage: String, Codable, Sendable {
     case sum
     case lastDuringPeriod = "last_during_period"
     case lastEver = "last_ever"
     case max
 }
 
-public enum PlanBillingScheme: String, Codable {
+public enum PlanBillingScheme: String, Codable, Sendable {
     case perUnit = "per_unit"
     case tiered
 }
 
-public enum PlanInterval: String, Codable {
+public enum PlanInterval: String, Codable, Sendable {
     case day
     case week
     case month
     case year
 }
 
-public struct PlanTier: Codable {
+public struct PlanTier: Codable, Sendable {
     /// Price for the entire tier.
     public var flatAmount: Int?
     /// Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.
@@ -138,12 +138,12 @@ public struct PlanTier: Codable {
     }
 }
 
-public enum PlanTiersMode: String, Codable {
+public enum PlanTiersMode: String, Codable, Sendable {
     case graduated
     case volume
 }
 
-public struct PlanTransformUsage: Codable {
+public struct PlanTransformUsage: Codable, Sendable {
     /// Divide usage by this number.
     public var divideBy: Int?
     /// After division, either round the result `up` or `down`.
@@ -155,17 +155,17 @@ public struct PlanTransformUsage: Codable {
     }
 }
 
-public enum PlanTransformUsageRound: String, Codable {
+public enum PlanTransformUsageRound: String, Codable, Sendable {
     case up
     case down
 }
 
-public enum PlanUsageType: String, Codable {
+public enum PlanUsageType: String, Codable, Sendable {
     case metered
     case licensed
 }
 
-public struct PlanList: Codable {
+public struct PlanList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

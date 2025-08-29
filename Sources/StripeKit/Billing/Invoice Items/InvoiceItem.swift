@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [InvoiceItem Object](https://stripe.com/docs/api/invoiceitems/object)
-public struct InvoiceItem: Codable {
+public struct InvoiceItem: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String?
     /// Amount (in the currency specified) of the invoice item. This should always be equal to unit_amount * quantity.
@@ -102,7 +102,7 @@ public struct InvoiceItem: Codable {
     }
 }
 
-public struct InvoiceItemPeriod: Codable {
+public struct InvoiceItemPeriod: Codable, Sendable {
     /// The start of the period. This value is inclusive.
     public var start: Date?
     /// The end of the period, which must be greater than or equal to the start. This value is inclusive.
@@ -114,7 +114,7 @@ public struct InvoiceItemPeriod: Codable {
     }
 }
 
-public struct InvoiceItemList: Codable {
+public struct InvoiceItemList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

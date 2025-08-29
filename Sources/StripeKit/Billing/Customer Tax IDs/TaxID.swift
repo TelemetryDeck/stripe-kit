@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Tax ID Object](https://stripe.com/docs/api/customer_tax_ids/object) .
-public struct TaxID: Codable {
+public struct TaxID: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Two-letter ISO code representing the country of the tax ID.
@@ -49,7 +49,7 @@ public struct TaxID: Codable {
     }
 }
 
-public enum TaxIDType: String, Codable {
+public enum TaxIDType: String, Codable, Sendable {
     case aeTrn = "ae_trn"
     case auAbn = "au_abn"
     case auArn = "au_arn"
@@ -104,7 +104,7 @@ public enum TaxIDType: String, Codable {
     case unknown
 }
 
-public struct TaxIDVerififcation: Codable {
+public struct TaxIDVerififcation: Codable, Sendable {
     /// Verification status, one of `pending`, `unavailable`, `unverified`, or `verified`.
     public var status: TaxIDVerififcationStatus?
     /// Verified address.
@@ -121,14 +121,14 @@ public struct TaxIDVerififcation: Codable {
     }
 }
 
-public enum TaxIDVerififcationStatus: String, Codable {
+public enum TaxIDVerififcationStatus: String, Codable, Sendable {
     case pending
     case unavailable
     case unverified
     case verified
 }
 
-public struct TaxIDList: Codable {
+public struct TaxIDList: Codable, Sendable {
     public var object: String
     public var url: String?
     public var hasMore: Bool?

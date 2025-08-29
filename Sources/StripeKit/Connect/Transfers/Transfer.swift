@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Transfer Object](https://stripe.com/docs/api/transfers/object) .
-public struct Transfer: Codable {
+public struct Transfer: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Amount in cents to be transferred.
@@ -81,13 +81,13 @@ public struct Transfer: Codable {
     }
 }
 
-public enum TransferSourceType: String, Codable {
+public enum TransferSourceType: String, Codable, Sendable {
     case card
     case fpx
     case bankAccount = "bank_account"
 }
 
-public struct TransferList: Codable {
+public struct TransferList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Transaction: Codable {
+public struct Transaction: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The amount of this transaction in your currency. This is the amount that your balance will be updated by.
@@ -88,7 +88,7 @@ public struct Transaction: Codable {
     }
 }
 
-public struct TransactionAmountDetails: Codable {
+public struct TransactionAmountDetails: Codable, Sendable {
     /// The fee charged by the ATM for the cash withdrawal.
     public var atmFee: Int?
     
@@ -97,7 +97,7 @@ public struct TransactionAmountDetails: Codable {
     }
 }
 
-public struct TransactionList: Codable {
+public struct TransactionList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?
@@ -114,14 +114,14 @@ public struct TransactionList: Codable {
     }
 }
 
-public enum TransactionType: String, Codable {
+public enum TransactionType: String, Codable, Sendable {
     /// Funds were captured by the acquirer. `amount` will be negative as funds are moving out of your balance. Not all captures will be linked to an authorization, as acquirers can force capture in some cases.
     case capture
     /// An acquirer initiated a refund. This transaction might not be linked to an original capture, for example credits are original transactions. `amount` will be positive for refunds and negative for refund reversals.
     case refund
 }
 
-public struct TransactionPurchaseDetails: Codable {
+public struct TransactionPurchaseDetails: Codable, Sendable {
     /// Information about the flight that was purchased with this transaction.
     public var flight: TransactionPurchaseDetailsFlight?
     /// Information about fuel that was purchased with this transaction.
@@ -146,7 +146,7 @@ public struct TransactionPurchaseDetails: Codable {
     }
 }
 
-public struct TransactionPurchaseDetailsFlight: Codable {
+public struct TransactionPurchaseDetailsFlight: Codable, Sendable {
     /// The time that the flight departed.
     public var departureAt: Int?
     /// The name of the passenger.
@@ -171,7 +171,7 @@ public struct TransactionPurchaseDetailsFlight: Codable {
     }
 }
 
-public struct TransactionPurchaseDetailsFlightSegment: Codable {
+public struct TransactionPurchaseDetailsFlightSegment: Codable, Sendable {
     /// The three-letter IATA airport code of the flight’s destination.
     public var arrivalAirportCode: String?
     /// The airline carrier code.
@@ -200,7 +200,7 @@ public struct TransactionPurchaseDetailsFlightSegment: Codable {
     }
 }
 
-public struct TransactionPurchaseDetailsFuel: Codable {
+public struct TransactionPurchaseDetailsFuel: Codable, Sendable {
     /// The type of fuel that was purchased. One of `diesel`, `unleaded_plus`, `unleaded_regular`, `unleaded_super`, or `other`.
     public var type: TransactionPurchaseDetailsFuelType?
     /// The units for `volume_decimal`. One of `us_gallon` or `liter`.
@@ -221,7 +221,7 @@ public struct TransactionPurchaseDetailsFuel: Codable {
     }
 }
 
-public enum TransactionPurchaseDetailsFuelType: String, Codable {
+public enum TransactionPurchaseDetailsFuelType: String, Codable, Sendable {
     case diesel
     case unleadedPlus = "unleaded_plus"
     case unleadedRegular = "unleaded_regular"
@@ -229,12 +229,12 @@ public enum TransactionPurchaseDetailsFuelType: String, Codable {
     case other
 }
 
-public enum TransactionPurchaseDetailsFuelUnit: String, Codable {
+public enum TransactionPurchaseDetailsFuelUnit: String, Codable, Sendable {
     case usGallon = "us_gallon"
     case liter
 }
 
-public struct TransactionPurchaseDetailsLodging: Codable {
+public struct TransactionPurchaseDetailsLodging: Codable, Sendable {
     /// The time of checking into the lodging.
     public var checkInAt: Int?
     /// The number of nights stayed at the lodging.
@@ -246,7 +246,7 @@ public struct TransactionPurchaseDetailsLodging: Codable {
     }
 }
 
-public struct TransactionPurchaseDetailsReceipt: Codable {
+public struct TransactionPurchaseDetailsReceipt: Codable, Sendable {
     /// The description of the item. The maximum length of this field is 26 characters.
     public var description: String?
     /// The quantity of the item.
@@ -267,7 +267,7 @@ public struct TransactionPurchaseDetailsReceipt: Codable {
     }
 }
 
-public enum TransactionWallet: String, Codable {
+public enum TransactionWallet: String, Codable, Sendable {
     case applePay = "apple_pay"
     case googlePay = "google_pay"
     case samsungPay = "samsung_pay"

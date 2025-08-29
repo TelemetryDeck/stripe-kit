@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Subscription Item Object](https://stripe.com/docs/api/subscription_items/object) .
-public struct SubscriptionItem: Codable {
+public struct SubscriptionItem: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
@@ -50,7 +50,7 @@ public struct SubscriptionItem: Codable {
     }
 }
 
-public struct SubscriptionItemBillingThresholds: Codable {
+public struct SubscriptionItemBillingThresholds: Codable, Sendable {
     /// Usage threshold that triggers the subscription to create an invoice
     public var usageGte: Int?
     
@@ -59,7 +59,7 @@ public struct SubscriptionItemBillingThresholds: Codable {
     }
 }
 
-public enum SubscriptionItemPaymentBehavior: String, Codable {
+public enum SubscriptionItemPaymentBehavior: String, Codable, Sendable {
     /// Use `allow_incomplete` to transition the subscription to `status=past_due` if a payment is required but cannot be paid.
     case allowIncomplete = "allow_incomplete"
     /// Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription’s first invoice cannot be paid.
@@ -71,13 +71,13 @@ public enum SubscriptionItemPaymentBehavior: String, Codable {
     
 }
 
-public enum SubscriptionItemProrationBehavior: String, Codable {
+public enum SubscriptionItemProrationBehavior: String, Codable, Sendable {
     case createProrations = "create_prorations"
     case alwaysInvoice = "always_invoice"
     case none
 }
 
-public struct SubscriptionItemList: Codable {
+public struct SubscriptionItemList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?
