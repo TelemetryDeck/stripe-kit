@@ -242,6 +242,8 @@ public enum SubscriptionCancellationDetailsFeedback: String, Codable {
     case tooComplex = "too_complex"
     /// Quality was less than expected
     case lowQuality = "low_quality"
+    /// Switched service
+    case switchedService = "switched_service"
     /// Other reason
     case other
 }
