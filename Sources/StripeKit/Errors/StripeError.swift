@@ -11,34 +11,34 @@ import Foundation
 /// Stripe uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the `2xx` range indicate success. Codes in the `4xx` range indicate an error that failed given the information provided (e.g., a required parameter was omitted, a charge failed, etc.). Codes in the `5xx` range indicate an error with Stripe's servers (these are rare).
 /// Some `4xx` errors that could be handled programmatically (e.g., a card is declined) include an error code that briefly explains the error reported.
 public final class StripeError: Codable, Error {
-    public var error: _StripeError?
+    public let error: _StripeError?
 }
 
-public final class _StripeError: Codable {
+public final class _StripeError: Codable, @unchecked Sendable {
     /// The type of error returned. One of `api_connection_error`, `api_error`, `authentication_error`, `card_error`, `idempotency_error`, `invalid_request_error`, or `rate_limit_error`
-    public var type: StripeErrorType?
+    public let type: StripeErrorType?
     /// For card errors, the ID of the failed charge.
-    public var charge: String?
+    public let charge: String?
     /// For some errors that could be handled programmatically, a short string indicating the error code reported.
-    public var code: StripeErrorCode?
+    public let code: StripeErrorCode?
     /// For card errors resulting from a card issuer decline, a short string indicating the [card issuer’s reason for the decline](https://stripe.com/docs/declines#issuer-declines) if they provide one.
-    public var declineCode: StripeDeclineCode?
+    public let declineCode: StripeDeclineCode?
     /// A URL to more information about the error code reported.
-    public var docUrl: String?
+    public let docUrl: String?
     /// A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.
-    public var message: String?
+    public let message: String?
     /// If the error is parameter-specific, the parameter related to the error. For example, you can use this to display a message near the correct form field.
-    public var param: String?
+    public let param: String?
     /// The PaymentIntent object for errors returned on a request involving a PaymentIntent.
-    public var paymentIntent: PaymentIntent?
+    public let paymentIntent: PaymentIntent?
     /// The PaymentMethod object for errors returned on a request involving a PaymentMethod.
-    public var paymentMethod: PaymentMethod?
+    public let paymentMethod: PaymentMethod?
     /// The source object for errors returned on a request involving a source.
-    public var source: Source?
+    public let source: Source?
 }
 
 // https://stripe.com/docs/api#errors-type
-public enum StripeErrorType: String, Codable {
+public enum StripeErrorType: String, Codable, Sendable {
     /// Failure to connect to Stripe's API.
     case apiConnectionError = "api_connection_error"
     /// API errors cover any other type of problem (e.g., a temporary problem with Stripe's servers), and are extremely uncommon
@@ -59,7 +59,7 @@ public enum StripeErrorType: String, Codable {
 
 // https://stripe.com/docs/api#errors-code
 // https://stripe.com/docs/error-codes
-public enum StripeErrorCode: String, Codable {
+public enum StripeErrorCode: String, Codable, Sendable {
     /// The email address provided for the creation of a deferred account already has an account associated with it. Use the OAuth flow to connect the existing account to your platform.
     case accountAlreadyExists = "account_already_exists"
     /// The country of the business address provided does not match the country of the account. Businesses must be located in the same country as the account.
@@ -236,7 +236,7 @@ public enum StripeErrorCode: String, Codable {
 
 // https://stripe.com/docs/api#errors-decline-code
 // https://stripe.com/docs/declines/codes
-public enum StripeDeclineCode: String, Codable {
+public enum StripeDeclineCode: String, Codable, Sendable {
     /// The payment cannot be authorized.
     case approveWithId = "approve_with_id"
     /// The card has been declined for an unknown reason.

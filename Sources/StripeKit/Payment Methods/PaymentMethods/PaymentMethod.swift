@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [PaymentMethod Object](https://stripe.com/docs/api/payment_methods/object) .
-public struct PaymentMethod: Codable {
+public struct PaymentMethod: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Billing information associated with the PaymentMethod that may be used or required by particular types of payment methods.
@@ -165,7 +165,7 @@ public struct PaymentMethod: Codable {
     }
 }
 
-public enum PaymentMethodType: String, Codable {
+public enum PaymentMethodType: String, Codable, Sendable {
     case acssDebit = "acss_debit"
     case affirm
     case afterpayClearpay = "afterpay_clearpay"
@@ -199,7 +199,7 @@ public enum PaymentMethodType: String, Codable {
     case wechatPay = "wechat_pay"
 }
 
-public struct PaymentMethodRadarOptions: Codable {
+public struct PaymentMethodRadarOptions: Codable, Sendable {
     /// A Radar Session is a snapshot of the browser metadata and device details that help Radar make more accurate predictions on your payments.
     public var session: String?
     
@@ -208,7 +208,7 @@ public struct PaymentMethodRadarOptions: Codable {
     }
 }
 
-public struct PaymentMethodList: Codable {
+public struct PaymentMethodList: Codable, Sendable {
     public var object: String
     public var data: [PaymentMethod]?
     public var hasMore: Bool?

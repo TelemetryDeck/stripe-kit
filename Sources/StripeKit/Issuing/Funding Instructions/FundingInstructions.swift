@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct FundingInstructions: Codable {
+public struct FundingInstructions: Codable, Sendable {
     /// Details to display instructions for initiating a bank transfer
     public var bankTransfer: FundingInstructionsBankTransfer?
     /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
@@ -32,7 +32,7 @@ public struct FundingInstructions: Codable {
     }
 }
 
-public struct FundingInstructionsBankTransfer: Codable {
+public struct FundingInstructionsBankTransfer: Codable, Sendable {
     /// The country of the bank account to fund
     public var country: String?
     /// A list of financial addresses that can be used to fund a particular balance
@@ -41,7 +41,7 @@ public struct FundingInstructionsBankTransfer: Codable {
     public var type: FundingInstructionsBankTransferType?
 }
 
-public struct FundingInstructionsBankTransferFinancialAddress: Codable {
+public struct FundingInstructionsBankTransferFinancialAddress: Codable, Sendable {
     /// An IBAN-based FinancialAddress
     public var iban: FundingInstructionsBankTransferFinancialAddressIban?
     /// An account number and sort code-based FinancialAddress
@@ -62,12 +62,12 @@ public struct FundingInstructionsBankTransferFinancialAddress: Codable {
     }
 }
 
-public enum FundingInstructionsBankTransferFinancialAddressType: String, Codable {
+public enum FundingInstructionsBankTransferFinancialAddressType: String, Codable, Sendable {
     case iban
     case sortCode = "sort_code"
 }
 
-public struct FundingInstructionsBankTransferFinancialAddressIban: Codable {
+public struct FundingInstructionsBankTransferFinancialAddressIban: Codable, Sendable {
     /// The name of the person or business that owns the bank account
     public var accountHolderName: String?
     /// The BIC/SWIFT code of the account.
@@ -88,7 +88,7 @@ public struct FundingInstructionsBankTransferFinancialAddressIban: Codable {
     }
 }
 
-public struct FundingInstructionsBankTransferFinancialAddressSortCode: Codable {
+public struct FundingInstructionsBankTransferFinancialAddressSortCode: Codable, Sendable {
     /// The name of the person or business that owns the bank account
     public var accountHolderName: String?
     /// The account number
@@ -105,25 +105,25 @@ public struct FundingInstructionsBankTransferFinancialAddressSortCode: Codable {
     }
 }
 
-public enum FundingInstructionsBankTransferFinancialAddressSupportedNetwork: String, Codable {
+public enum FundingInstructionsBankTransferFinancialAddressSupportedNetwork: String, Codable, Sendable {
     case bacs
     case fps
     case sepa
 }
 
-public enum FundingInstructionsBankTransferType: String, Codable {
+public enum FundingInstructionsBankTransferType: String, Codable, Sendable {
     /// A  bank transfer to an EU bank account
     case euBankTransfer = "eu_bank_transfer"
     /// A bank transfer to a GB bank account
     case gbBankTransfer = "gb_bank_transfer"
 }
 
-public enum FundingInstructionsFundingType: String, Codable {
+public enum FundingInstructionsFundingType: String, Codable, Sendable {
     /// Use a `bank_transfer` hash to define the bank transfer type
     case bankTransfer = "bank_transfer"
 }
 
-public struct FundingInstructionsList: Codable {
+public struct FundingInstructionsList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

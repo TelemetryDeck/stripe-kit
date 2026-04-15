@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Dispute Object](https://stripe.com/docs/api/disputes/object)
-public struct Dispute: Codable {
+public struct Dispute: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Disputed amount. Usually the amount of the charge, but can differ (usually because of currency fluctuation or because only part of the order is disputed).
@@ -74,7 +74,7 @@ public struct Dispute: Codable {
     }
 }
 
-public struct DisputeEvidenceDetails: Codable {
+public struct DisputeEvidenceDetails: Codable, Sendable {
     /// Date by which evidence must be submitted in order to successfully challenge dispute. Will be null if the customer’s bank or credit card company doesn’t allow a response for this particular dispute.
     public var dueBy: Date?
     /// Whether evidence has been staged for this dispute.
@@ -95,7 +95,7 @@ public struct DisputeEvidenceDetails: Codable {
     }
 }
 
-public enum DisputeReason: String, Codable {
+public enum DisputeReason: String, Codable, Sendable {
     case bankCannotProcess = "bank_cannot_process"
     case checkReturned = "check_returned"
     case creditNotProcessed = "credit_not_processed"
@@ -112,7 +112,7 @@ public enum DisputeReason: String, Codable {
     case unrecognized
 }
 
-public enum DisputeStatus: String, Codable {
+public enum DisputeStatus: String, Codable, Sendable {
     case warningNeedsResponse = "warning_needs_response"
     case warningUnderReview = "warning_under_review"
     case warningClosed = "warning_closed"
@@ -123,7 +123,7 @@ public enum DisputeStatus: String, Codable {
     case lost
 }
 
-public struct DisputeList: Codable {
+public struct DisputeList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

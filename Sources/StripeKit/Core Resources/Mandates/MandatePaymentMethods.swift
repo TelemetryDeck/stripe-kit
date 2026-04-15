@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - ACSSDebit
-public struct MandatePaymentMethodDetailsACSSDebit: Codable {
+public struct MandatePaymentMethodDetailsACSSDebit: Codable, Sendable {
     /// List of Stripe products where this mandate can be selected automatically.
     public var defaultFor: MandatePaymentMethodDetailsACSSDebitDefaultFor?
     /// Description of the interval. Only required if the `‘payment_schedule’` parameter is `‘interval’` or`‘combined’`.
@@ -29,14 +29,14 @@ public struct MandatePaymentMethodDetailsACSSDebit: Codable {
     }
 }
 
-public enum MandatePaymentMethodDetailsACSSDebitDefaultFor: String, Codable {
+public enum MandatePaymentMethodDetailsACSSDebitDefaultFor: String, Codable, Sendable {
     /// Enables payments for Stripe Invoices. ‘subscription’ must also be provided.
     case invoice
     /// Enables payments for Stripe Subscriptions. ‘invoice’ must also be provided.
     case subscription
 }
 
-public enum MandatePaymentMethodDetailsACSSDebitPaymentSchedule: String, Codable {
+public enum MandatePaymentMethodDetailsACSSDebitPaymentSchedule: String, Codable, Sendable {
     /// Payments are initiated at a regular pre-defined interval
     case interval
     /// Payments are initiated sporadically
@@ -45,7 +45,7 @@ public enum MandatePaymentMethodDetailsACSSDebitPaymentSchedule: String, Codable
     case combined
 }
 
-public enum MandatePaymentMethodDetailsACSSDebitTransactionType: String, Codable {
+public enum MandatePaymentMethodDetailsACSSDebitTransactionType: String, Codable, Sendable {
     /// Transactions are made for personal reasons
     case personal
     /// Transactions are made for business reasons
@@ -53,7 +53,7 @@ public enum MandatePaymentMethodDetailsACSSDebitTransactionType: String, Codable
 }
 
 // MARK: - AUBecsDebit
-public struct MandatePaymentMethodDetailsAuBecsDebit: Codable {
+public struct MandatePaymentMethodDetailsAuBecsDebit: Codable, Sendable {
     /// The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.
     public var url: String?
     
@@ -63,7 +63,7 @@ public struct MandatePaymentMethodDetailsAuBecsDebit: Codable {
 }
 
 // MARK: - BacsDebit
-public struct MandatePaymentMethodDetailsBacsDebit: Codable {
+public struct MandatePaymentMethodDetailsBacsDebit: Codable, Sendable {
     /// The status of the mandate on the Bacs network. Can be one of  `pending`, `revoked`,`refused`, or `accepted`.
     public var networkStatus: MandatePaymentMethodDetailsBacsDebitnetworkStatus?
     /// The unique reference identifying the mandate on the Bacs network.
@@ -80,7 +80,7 @@ public struct MandatePaymentMethodDetailsBacsDebit: Codable {
     }
 }
 
-public enum MandatePaymentMethodDetailsBacsDebitnetworkStatus: String, Codable {
+public enum MandatePaymentMethodDetailsBacsDebitnetworkStatus: String, Codable, Sendable {
     case pending
     case revoked
     case refused
@@ -88,7 +88,7 @@ public enum MandatePaymentMethodDetailsBacsDebitnetworkStatus: String, Codable {
 }
 
 // MARK: - Blik
-public struct MandatePaymentMethodDetailsBlik: Codable {
+public struct MandatePaymentMethodDetailsBlik: Codable, Sendable {
     /// Date at which the mandate expires.
     public var expiresAfter: Date?
     /// Details for off-session mandates.
@@ -105,7 +105,7 @@ public struct MandatePaymentMethodDetailsBlik: Codable {
     }
 }
 
-public struct MandatePaymentMethodDetailsBlikOffSession: Codable {
+public struct MandatePaymentMethodDetailsBlikOffSession: Codable, Sendable {
     /// Amount of each recurring payment.
     public var amount: Int?
     /// Currency of each recurring payment.
@@ -122,7 +122,7 @@ public struct MandatePaymentMethodDetailsBlikOffSession: Codable {
     }
 }
 
-public enum MandatePaymentMethodDetailsBlikOffSessionInterval: String, Codable {
+public enum MandatePaymentMethodDetailsBlikOffSessionInterval: String, Codable, Sendable {
     /// Payments recur every day.
     case day
     /// Payments recur every week.
@@ -133,7 +133,7 @@ public enum MandatePaymentMethodDetailsBlikOffSessionInterval: String, Codable {
     case year
 }
 
-public enum MandatePaymentMethodDetailsBlikType: String, Codable {
+public enum MandatePaymentMethodDetailsBlikType: String, Codable, Sendable {
     /// Mandate for on-session payments.
     case onSession = "on_session"
     /// Mandate for off-session payments.
@@ -141,17 +141,17 @@ public enum MandatePaymentMethodDetailsBlikType: String, Codable {
 }
 
 // MARK: - Card
-public struct MandatePaymentMethodDetailsCard: Codable {
+public struct MandatePaymentMethodDetailsCard: Codable, Sendable {
     public init() { }
 }
 
 // MARK: - Link
-public struct MandatePaymentMethodDetailsLink: Codable {
+public struct MandatePaymentMethodDetailsLink: Codable, Sendable {
     public init() { }
 }
 
 // MARK: - SepaDebit
-public struct MandatePaymentMethodDetailsSepaDebit: Codable {
+public struct MandatePaymentMethodDetailsSepaDebit: Codable, Sendable {
     /// The unique reference of the mandate.
     public var reference: String?
     /// The URL of the mandate. This URL generally contains sensitive information about the customer and should be shared with them exclusively.
@@ -164,6 +164,6 @@ public struct MandatePaymentMethodDetailsSepaDebit: Codable {
 }
 
 // MARK: - US Bank Account
-public struct MandatePaymentMethodDetailsUsBankAccount: Codable {
+public struct MandatePaymentMethodDetailsUsBankAccount: Codable, Sendable {
     public init() { }
 }

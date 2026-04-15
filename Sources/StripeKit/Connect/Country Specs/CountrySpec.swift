@@ -7,7 +7,7 @@
 
 import Foundation
 /// Stripe needs to collect certain pieces of information about each account created. These requirements can differ depending on the account's country. The Country Specs API makes these rules available to your integration.
-public struct CountrySpec: Codable {
+public struct CountrySpec: Codable, Sendable {
     /// Unique identifier for the object. Represented as the ISO country code for this country.
     public var id: String
     /// The default currency for this country. This applies to both payment methods and bank accounts.
@@ -44,7 +44,7 @@ public struct CountrySpec: Codable {
     }
 }
 
-public struct CountrySpecList: Codable {
+public struct CountrySpecList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?
@@ -61,7 +61,7 @@ public struct CountrySpecList: Codable {
     }
 }
 
-public struct CountrySpecVerificationFields: Codable {
+public struct CountrySpecVerificationFields: Codable, Sendable {
     /// Verification types for company account.
     public var company: CountrySpecVerificationFieldsAttributes?
     /// Verification types for individual account.
@@ -73,7 +73,7 @@ public struct CountrySpecVerificationFields: Codable {
     }
 }
 
-public struct CountrySpecVerificationFieldsAttributes: Codable {
+public struct CountrySpecVerificationFieldsAttributes: Codable, Sendable {
     /// Additional fieCountrySpecy required for some users.
     public var additional: [String]?
     /// Fields which every account must eventually provide.

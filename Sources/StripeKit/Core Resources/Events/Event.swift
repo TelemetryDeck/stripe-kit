@@ -7,7 +7,7 @@
 
 import Foundation
 /// The [Event Object](https://stripe.com/docs/api/events/object)
-public struct Event: Codable {
+public struct Event: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The Stripe API version used to render data. Note: This property is populated only for events on or after October 31, 2014.
@@ -52,7 +52,7 @@ public struct Event: Codable {
     }
 }
 
-public struct EventData: Codable {
+public struct EventData: Codable, Sendable {
     /// Object containing the API resource relevant to the event. For example, an `invoice.created` event will have a full [invoice object](https://stripe.com/docs/api/events/object#invoice_object) as the value of the object key.
     public var object: EventObject
     
@@ -65,7 +65,7 @@ public struct EventData: Codable {
     }
 }
 
-public enum EventObject: Codable {
+public enum EventObject: Codable, Sendable {
     case account(ConnectAccount)
     case application(ConnectApplication)
     case card(Card)
@@ -354,7 +354,7 @@ public enum EventObject: Codable {
     }
 }
 
-public struct EventRequest: Codable {
+public struct EventRequest: Codable, Sendable {
     /// ID of the API request that caused the event. If null, the event was automatic (e.g., Stripe’s automatic subscription handling). Request logs are available in the dashboard, but currently not in the API.
     public var id: String?
     /// The idempotency key transmitted during the request, if any. Note: This property is populated only for events on or after May 23, 2017.
@@ -367,7 +367,7 @@ public struct EventRequest: Codable {
     }
 }
 
-public enum EventType: String, Codable {
+public enum EventType: String, Codable, Sendable {
     /// Occurs whenever a user authorizes an application. Sent to the related application only.
     case accountApplicationAuthorized = "account.application.authorized"
     /// Occurs whenever a user deauthorizes an application. Sent to the related application only.
@@ -760,7 +760,7 @@ public enum EventType: String, Codable {
     case unknownEvent = "unknown"
 }
 
-public struct EventList: Codable {
+public struct EventList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

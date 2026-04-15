@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Early Fraud Warning Object](https://stripe.com/docs/api/radar/early_fraud_warnings/object)
-public struct EarlyFraudWarning: Codable {
+public struct EarlyFraudWarning: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -45,7 +45,7 @@ public struct EarlyFraudWarning: Codable {
     }
 }
 
-public enum EarlyFraudWarningFraudType: String, Codable {
+public enum EarlyFraudWarningFraudType: String, Codable, Sendable {
     case cardNeverReceived = "card_never_received"
     case fraudulentCardApplication = "fraudulent_card_application"
     case madeWithCounterfeitCard = "made_with_counterfeit_card"
@@ -55,7 +55,7 @@ public enum EarlyFraudWarningFraudType: String, Codable {
     case unauthorizedUseOfCard = "unauthorized_use_of_card"
 }
 
-public struct EarlyFraudWarningList: Codable {
+public struct EarlyFraudWarningList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

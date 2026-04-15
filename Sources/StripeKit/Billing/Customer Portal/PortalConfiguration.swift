@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PortalConfiguration: Codable {
+public struct PortalConfiguration: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -64,7 +64,7 @@ public struct PortalConfiguration: Codable {
     }
 }
 
-public struct PortalConfigurationBusinessProfile: Codable {
+public struct PortalConfigurationBusinessProfile: Codable, Sendable {
     /// The messaging shown to customers in the portal.
     public var headline: String?
     /// A link to the business’s publicly available privacy policy.
@@ -81,7 +81,7 @@ public struct PortalConfigurationBusinessProfile: Codable {
     }
 }
 
-public struct PortalConfigurationFeatures: Codable {
+public struct PortalConfigurationFeatures: Codable, Sendable {
     /// Information about updating customer details in the portal.
     public var customerUpdate: PortalConfigurationFeaturesCustomerUpdate?
     /// Information about showing invoice history in the portal.
@@ -110,7 +110,7 @@ public struct PortalConfigurationFeatures: Codable {
     }
 }
 
-public struct PortalConfigurationFeaturesCustomerUpdate: Codable {
+public struct PortalConfigurationFeaturesCustomerUpdate: Codable, Sendable {
     /// The types of customer updates that are supported. When empty, customers are not updateable.
     public var allowedUpdates: [PortalConfigurationFeaturesCustomerUpdateAllowedUpdate]?
     
@@ -119,7 +119,7 @@ public struct PortalConfigurationFeaturesCustomerUpdate: Codable {
     }
 }
 
-public enum PortalConfigurationFeaturesCustomerUpdateAllowedUpdate: String, Codable {
+public enum PortalConfigurationFeaturesCustomerUpdateAllowedUpdate: String, Codable, Sendable {
     /// Allow updating email addresses.
     case email
     /// Allow updating billing addresses.
@@ -132,7 +132,7 @@ public enum PortalConfigurationFeaturesCustomerUpdateAllowedUpdate: String, Coda
     case taxId = "tax_id"
 }
 
-public struct PortalConfigurationFeaturesInvoiceHistory: Codable {
+public struct PortalConfigurationFeaturesInvoiceHistory: Codable, Sendable {
     /// Whether the feature is enabled.
     public var enabled: Bool?
     
@@ -141,7 +141,7 @@ public struct PortalConfigurationFeaturesInvoiceHistory: Codable {
     }
 }
 
-public struct PortalConfigurationFeaturesPaymentMethodUpdate: Codable {
+public struct PortalConfigurationFeaturesPaymentMethodUpdate: Codable, Sendable {
     /// Whether the feature is enabled.
     public var enabled: Bool?
     
@@ -150,7 +150,7 @@ public struct PortalConfigurationFeaturesPaymentMethodUpdate: Codable {
     }
 }
 
-public struct PortalConfigurationFeaturesSubscriptionCancel: Codable {
+public struct PortalConfigurationFeaturesSubscriptionCancel: Codable, Sendable {
     /// Whether the cancellation reasons will be collected in the portal and which options are exposed to the customer
     public var cancellationReason: PortalConfigurationFeaturesSubscriptionCancelationReason?
     /// Whether the feature is enabled.
@@ -171,7 +171,7 @@ public struct PortalConfigurationFeaturesSubscriptionCancel: Codable {
     }
 }
 
-public struct PortalConfigurationFeaturesSubscriptionCancelationReason: Codable {
+public struct PortalConfigurationFeaturesSubscriptionCancelationReason: Codable, Sendable {
     /// Whether the feature is enabled.
     public var enabled: Bool?
     /// Which cancellation reasons will be given as options to the customer.
@@ -184,7 +184,7 @@ public struct PortalConfigurationFeaturesSubscriptionCancelationReason: Codable 
     }
 }
 
-public enum PortalConfigurationFeaturesSubscriptionCancelationReasonOption: String, Codable {
+public enum PortalConfigurationFeaturesSubscriptionCancelationReasonOption: String, Codable, Sendable {
     /// It’s too expensive
     case tooExpensive = "too_expensive"
     /// Some features are missing
@@ -203,14 +203,14 @@ public enum PortalConfigurationFeaturesSubscriptionCancelationReasonOption: Stri
     case other
 }
 
-public enum PortalConfigurationFeaturesSubscriptionCancelMode: String, Codable {
+public enum PortalConfigurationFeaturesSubscriptionCancelMode: String, Codable, Sendable {
     /// Cancel subscriptions immediately
     case immediately
     /// After canceling, customers can still renew subscriptions until the billing period ends.
     case atPeriodEnd = "at_period_end"
 }
 
-public struct PortalConfigurationFeaturesSubscriptionPause: Codable {
+public struct PortalConfigurationFeaturesSubscriptionPause: Codable, Sendable {
     /// Whether the feature is enabled.
     public var enabled: Bool?
     
@@ -219,7 +219,7 @@ public struct PortalConfigurationFeaturesSubscriptionPause: Codable {
     }
 }
 
-public struct PortalConfigurationFeaturesSubscriptionUpdate: Codable {
+public struct PortalConfigurationFeaturesSubscriptionUpdate: Codable, Sendable {
     /// The types of subscription updates that are supported for items listed in the products attribute. When empty, subscriptions are not updateable.
     public var defaultAllowedUpdates: [PortalConfigurationFeaturesSubscriptionUpdateDefaultAllowedUpdate]?
     /// Whether the feature is enabled.
@@ -241,7 +241,7 @@ public struct PortalConfigurationFeaturesSubscriptionUpdate: Codable {
     }
 }
 
-public enum PortalConfigurationFeaturesSubscriptionUpdateDefaultAllowedUpdate: String, Codable {
+public enum PortalConfigurationFeaturesSubscriptionUpdateDefaultAllowedUpdate: String, Codable, Sendable {
     /// Allow switching to a different price.
     case price
     /// Allow updating subscription quantities.
@@ -250,7 +250,7 @@ public enum PortalConfigurationFeaturesSubscriptionUpdateDefaultAllowedUpdate: S
     case promotionCode = "promotion_code"
 }
 
-public struct PortalConfigurationFeaturesSubscriptionUpdateProduct: Codable {
+public struct PortalConfigurationFeaturesSubscriptionUpdateProduct: Codable, Sendable {
     /// The list of price IDs which, when subscribed to, a subscription can be updated.
     public var prices: [String]?
     /// The product ID.
@@ -262,7 +262,7 @@ public struct PortalConfigurationFeaturesSubscriptionUpdateProduct: Codable {
     }
 }
 
-public struct PortalConfigurationLoginPage: Codable {
+public struct PortalConfigurationLoginPage: Codable, Sendable {
     /// If true, a shareable url will be generated that will take your customers to a hosted login page for the customer portal. If false, the previously generated url, if any, will be deactivated.
     public var enabled: Bool?
     /// A shareable URL to the hosted portal login page. Your customers will be able to log in with their email and receive a link to their customer portal.
@@ -274,7 +274,7 @@ public struct PortalConfigurationLoginPage: Codable {
     }
 }
 
-public struct PortalConfigurationList: Codable {
+public struct PortalConfigurationList: Codable, Sendable {
     /// String representing the object’s type. Objects of the same type share the same value. Always has the value list.
     public var object: String
     /// An array of `StripePortalConfiguration`s

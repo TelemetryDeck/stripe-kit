@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TerminalHardwareOrder: Codable {
+public struct TerminalHardwareOrder: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// A positive integer in the smallest currency unit. Represents the total cost for the order.
@@ -76,7 +76,7 @@ public struct TerminalHardwareOrder: Codable {
     }
 }
 
-public struct TerminalHardwareOrderLineItem: Codable {
+public struct TerminalHardwareOrderLineItem: Codable, Sendable {
     /// A positive integer that represents the cost of the order in the smallest currency unit.
     public var amount: Int?
     /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
@@ -97,13 +97,13 @@ public struct TerminalHardwareOrderLineItem: Codable {
     }
 }
 
-public enum TerminalHardwareOrderPaymentType: String, Codable {
+public enum TerminalHardwareOrderPaymentType: String, Codable, Sendable {
     case monthlyInvoice = "monthly_invoice"
     case paymentIntent = "payment_intent"
     case `none`
 }
 
-public struct TerminalHardwareOrderShipping: Codable {
+public struct TerminalHardwareOrderShipping: Codable, Sendable {
     /// Shipping address.
     public var address: Address?
     /// A positive integer in the smallest currency unit. Represents the cost for shippingthe order.
@@ -136,7 +136,7 @@ public struct TerminalHardwareOrderShipping: Codable {
     }
 }
 
-public enum TerminalHardwareOrderStatus: String, Codable {
+public enum TerminalHardwareOrderStatus: String, Codable, Sendable {
     /// Order has been received and can still be canceled.
     case pending
     /// Order was canceled. Please create a new order to receive these items.
@@ -149,7 +149,7 @@ public enum TerminalHardwareOrderStatus: String, Codable {
     case undeliverable
 }
 
-public struct TerminalHardwareOrderShipmentTracking: Codable {
+public struct TerminalHardwareOrderShipmentTracking: Codable, Sendable {
     /// The name of the carrier delivering the order.
     public var carrier: TerminalHardwareOrderShipmentTrackingCarrier?
     /// The number used to identify the shipment with the carrier responsible for delivery.
@@ -162,7 +162,7 @@ public struct TerminalHardwareOrderShipmentTracking: Codable {
     }
 }
 
-public enum TerminalHardwareOrderShipmentTrackingCarrier: String, Codable {
+public enum TerminalHardwareOrderShipmentTrackingCarrier: String, Codable, Sendable {
     /// A placeholder to catch new carriers in your integration as we introduce them.
     case other
     /// UPS
@@ -183,7 +183,7 @@ public enum TerminalHardwareOrderShipmentTrackingCarrier: String, Codable {
     case dpd
 }
 
-public struct TerminalHardwareOrderTotalTaxAmount: Codable {
+public struct TerminalHardwareOrderTotalTaxAmount: Codable, Sendable {
     /// A positive integer that represents the cost of tax in the smallest currency unit.
     public var amount: Int?
     /// Whether the tax rate is inclusive or exclusive
@@ -200,7 +200,7 @@ public struct TerminalHardwareOrderTotalTaxAmount: Codable {
     }
 }
 
-public struct TerminalHardwareOrderTotalTaxAmountRate: Codable {
+public struct TerminalHardwareOrderTotalTaxAmountRate: Codable, Sendable {
     /// The display name of the tax rate.
     public var displayName: String?
     /// Tax jurisdiction.
@@ -217,7 +217,7 @@ public struct TerminalHardwareOrderTotalTaxAmountRate: Codable {
     }
 }
 
-public struct TerminalHardwareOrderList: Codable {
+public struct TerminalHardwareOrderList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

@@ -10,7 +10,7 @@ import Foundation
 /// [The ActiveEntitlement Object](https://docs.stripe.com/api/entitlements/active-entitlement/object)
 ///
 /// An active entitlement describes access to a feature for a customer.
-public struct ActiveEntitlement: Codable {
+public struct ActiveEntitlement: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The Feature that the customer is entitled to.
@@ -23,7 +23,7 @@ public struct ActiveEntitlement: Codable {
     public var livemode: Bool?
 }
 
-public struct ActiveEntitlementList: Codable {
+public struct ActiveEntitlementList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

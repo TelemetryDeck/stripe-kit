@@ -9,7 +9,7 @@
 import Foundation
 
 /// The [Invoice Line Item Object](https://stripe.com/docs/api/invoices/line_item) .
-public struct InvoiceLineItem: Codable {
+public struct InvoiceLineItem: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String?
     /// The amount, in cents.
@@ -105,7 +105,7 @@ public struct InvoiceLineItem: Codable {
     }
 }
 
-public struct InvoiceLineItemPeriod: Codable {
+public struct InvoiceLineItemPeriod: Codable, Sendable {
     /// Start of the line item’s billing period
     public var start: Date?
     /// End of the line item’s billing period
@@ -117,12 +117,12 @@ public struct InvoiceLineItemPeriod: Codable {
     }
 }
 
-public enum InvoiceLineItemType: String, Codable {
+public enum InvoiceLineItemType: String, Codable, Sendable {
     case invoiceitem
     case subscription
 }
 
-public struct InvoiceLineItemDiscountAmount: Codable {
+public struct InvoiceLineItemDiscountAmount: Codable, Sendable {
     /// The amount, in cents, of the discount.
     public var amount: Int?
     /// The discount that was applied to get this discount amount.
@@ -134,7 +134,7 @@ public struct InvoiceLineItemDiscountAmount: Codable {
     }
 }
 
-public struct InvoiceLineItemProrationDetails: Codable {
+public struct InvoiceLineItemProrationDetails: Codable, Sendable {
     /// For a credit proration `line_item`, the original debit `line_items` to which the credit proration applies.
     public var creditedItems: InvoiceLineItemProrationDetailsCreditedItem?
     
@@ -143,7 +143,7 @@ public struct InvoiceLineItemProrationDetails: Codable {
     }
 }
 
-public struct InvoiceLineItemProrationDetailsCreditedItem: Codable {
+public struct InvoiceLineItemProrationDetailsCreditedItem: Codable, Sendable {
     /// Invoice containing the credited invoice line items
     public var invoice: String?
     /// Credited invoice line items
@@ -155,7 +155,7 @@ public struct InvoiceLineItemProrationDetailsCreditedItem: Codable {
     }
 }
 
-public struct InvoiceLineItemList: Codable {
+public struct InvoiceLineItemList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?
@@ -172,7 +172,7 @@ public struct InvoiceLineItemList: Codable {
     }
 }
 
-public struct InvoiceSearchResult: Codable {
+public struct InvoiceSearchResult: Codable, Sendable {
     /// A string describing the object type returned.
     public var object: String
     /// A list of invoices, paginated by any request parameters.

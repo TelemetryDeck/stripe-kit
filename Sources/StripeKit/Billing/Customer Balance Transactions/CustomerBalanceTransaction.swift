@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Customer Balance Transaction Object](https://stripe.com/docs/api/customer_balance_transactions/object) .
-public struct CustomerBalanceTransaction: Codable {
+public struct CustomerBalanceTransaction: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The amount of the transaction. A negative value is a credit for the customer’s balance, and a positive value is a debit to the customer’s balance.
@@ -65,7 +65,7 @@ public struct CustomerBalanceTransaction: Codable {
     }
 }
 
-public enum CustomerBalanceTransactionType: String, Codable {
+public enum CustomerBalanceTransactionType: String, Codable, Sendable {
     case adjustment
     case appliedToInvoice = "applied_to_invoice"
     case creditNote = "credit_note"
@@ -77,7 +77,7 @@ public enum CustomerBalanceTransactionType: String, Codable {
     case unappliedFromInvoice = "unapplied_from_invoice"
 }
 
-public struct CustomerBalanceTransactionList: Codable {
+public struct CustomerBalanceTransactionList: Codable, Sendable {
     public var object: String
     public var data: [CustomerBalanceTransaction]?
     public var hasMore: Bool?

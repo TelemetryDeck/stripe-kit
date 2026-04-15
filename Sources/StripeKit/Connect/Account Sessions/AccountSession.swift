@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct AccountSession: Codable {
+public struct AccountSession: Codable, Sendable {
     /// The ID of the account the AccountSession was created for
     public var account: String
     /// The client secret of this AccountSession. Used on the client to set up secure access to the given account.

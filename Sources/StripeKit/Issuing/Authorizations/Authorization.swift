@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Authorization Object](https://stripe.com/docs/api/issuing/authorizations/object)
-public struct Authorization: Codable {
+public struct Authorization: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The total amount that was authorized or rejected. This amount is in the card’s currency and in the smallest currency unit.
@@ -105,7 +105,7 @@ public struct Authorization: Codable {
     }
 }
 
-public struct AuthorizationAmountDetails: Codable {
+public struct AuthorizationAmountDetails: Codable, Sendable {
     /// The fee charged by the ATM for the cash withdrawal.
     public var atmFee: Int?
     
@@ -114,7 +114,7 @@ public struct AuthorizationAmountDetails: Codable {
     }
 }
 
-public struct AuthorizationPendingRequest: Codable {
+public struct AuthorizationPendingRequest: Codable, Sendable {
     /// The additional amount Stripe will hold if the authorization is approved, in the card’s currency and in the smallest currency unit.
     public var amount: Int?
     /// Detailed breakdown of amount components. These amounts are denominated in currency and in the smallest currency unit.
@@ -143,7 +143,7 @@ public struct AuthorizationPendingRequest: Codable {
     }
 }
 
-public struct AuthorizationPendingRequestAmountDetails: Codable {
+public struct AuthorizationPendingRequestAmountDetails: Codable, Sendable {
     /// The fee charged by the ATM for the cash withdrawal.
     public var atmFee: Int?
     
@@ -152,7 +152,7 @@ public struct AuthorizationPendingRequestAmountDetails: Codable {
     }
 }
 
-public enum AuthorizationMethod: String, Codable {
+public enum AuthorizationMethod: String, Codable, Sendable {
     /// The card number was manually entered into a terminal.
     case keyedIn = "keyed_in"
     /// The card was physically swiped in a terminal.
@@ -165,7 +165,7 @@ public enum AuthorizationMethod: String, Codable {
     case online
 }
 
-public struct AuthorizationMerchantData: Codable {
+public struct AuthorizationMerchantData: Codable, Sendable {
     // TODO: - Make this an enum once it's solidified. https://stripe.com/docs/issuing/merchant-categories
     /// A categorization of the seller’s type of business. See our merchant categories guide for a list of possible values.
     public var category: String?
@@ -207,7 +207,7 @@ public struct AuthorizationMerchantData: Codable {
     }
 }
 
-public struct AuthorizationNetworkData: Codable {
+public struct AuthorizationNetworkData: Codable, Sendable {
     /// Identifier assigned to the acquirer by the card network. Sometimes this value is not provided by the network; in this case, the value will be `null`.
     public var acquiringInstitutionId: String?
     
@@ -216,7 +216,7 @@ public struct AuthorizationNetworkData: Codable {
     }
 }
 
-public struct AuthorizationRequestHistory: Codable {
+public struct AuthorizationRequestHistory: Codable, Sendable {
     /// The `pending_request.amount` at the time of the request, presented in your card’s currency and in the smallest currency unit. Stripe held this amount from your account to fund the authorization if the request was approved.
     public var amount: Int?
     /// Detailed breakdown of amount components. These amounts are denominated in currency and in the smallest currency unit.
@@ -253,7 +253,7 @@ public struct AuthorizationRequestHistory: Codable {
     }
 }
 
-public struct AuthorizationRequestHistoryAmountDetails: Codable {
+public struct AuthorizationRequestHistoryAmountDetails: Codable, Sendable {
     /// The fee charged by the ATM for the cash withdrawal.
     public var atmFee: Int?
     
@@ -262,7 +262,7 @@ public struct AuthorizationRequestHistoryAmountDetails: Codable {
     }
 }
 
-public enum AuthorizationRequestHistoryReason: String, Codable {
+public enum AuthorizationRequestHistoryReason: String, Codable, Sendable {
     /// The authorization request was declined because your account is disabled. For more information, please contact us at support-issuing@stripe.com. Replaces the deprecated `account_inactive` and `account_compliance_disabled` enums.
     case accountDisabled = "account_disabled"
     /// The authorization was declined because of your spending controls. Documentation for updating your spending controls can be found here. Replaces the deprecated `authorization_controls` enum.
@@ -293,13 +293,13 @@ public enum AuthorizationRequestHistoryReason: String, Codable {
     case verificationFailed = "verification_failed"
 }
 
-public enum AuthorizationStatus: String, Codable {
+public enum AuthorizationStatus: String, Codable, Sendable {
     case pending
     case reversed
     case closed
 }
 
-public struct AuthorizationVerificationData: Codable {
+public struct AuthorizationVerificationData: Codable, Sendable {
     /// Whether the cardholder provided an address first line and if it matched the cardholder’s `billing.address.line1`.
     public var addressLine1Check: AuthorizationVerificationDataCheck?
     /// Whether the cardholder provided a postal code and if it matched the cardholder’s `billing.address.postal_code`.
@@ -320,19 +320,19 @@ public struct AuthorizationVerificationData: Codable {
     }
 }
 
-public enum AuthorizationVerificationDataCheck: String, Codable {
+public enum AuthorizationVerificationDataCheck: String, Codable, Sendable {
     case match
     case mismatch
     case notProvided = "not_provided"
 }
 
-public enum AuthorizationWallet: String, Codable {
+public enum AuthorizationWallet: String, Codable, Sendable {
     case applePay = "apple_pay"
     case googlePay = "google_pay"
     case samsungPay = "samsung_pay"
 }
 
-public struct AuthorizationList: Codable {
+public struct AuthorizationList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

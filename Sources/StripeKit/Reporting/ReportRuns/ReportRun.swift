@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Report Run Object](https://stripe.com/docs/api/reporting/report_run/object) .
-public struct ReportRun: Codable {
+public struct ReportRun: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Parameters of this report run.
@@ -53,7 +53,7 @@ public struct ReportRun: Codable {
     }
 }
 
-public struct ReportRunParameters: Codable {
+public struct ReportRunParameters: Codable, Sendable {
     /// The set of output columns requested for inclusion in the report run.
     public var columns: [String]?
     /// Connected account ID by which to filter the report run.
@@ -90,13 +90,13 @@ public struct ReportRunParameters: Codable {
     }
 }
 
-public enum ReportRunStatus: String, Codable {
+public enum ReportRunStatus: String, Codable, Sendable {
     case pending
     case succeeded
     case failed
 }
 
-public struct ReportRunList: Codable {
+public struct ReportRunList: Codable, Sendable {
     public var object: String
     public var data: [ReportRun]?
     public var hasMore: Bool?

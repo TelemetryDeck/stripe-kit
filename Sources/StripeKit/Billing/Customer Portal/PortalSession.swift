@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PortalSession: Codable {
+public struct PortalSession: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -56,7 +56,7 @@ public struct PortalSession: Codable {
     }
 }
 
-public struct PortalSessionFlow: Codable {
+public struct PortalSessionFlow: Codable, Sendable {
     /// Behavior after the flow is completed.
     public var afterCompletion: PortalSessionFlowAfterCompletion?
     /// Configuration when `flow.type=subscription_cancel`.
@@ -73,7 +73,7 @@ public struct PortalSessionFlow: Codable {
     }
 }
 
-public struct PortalSessionFlowAfterCompletion: Codable {
+public struct PortalSessionFlowAfterCompletion: Codable, Sendable {
     /// Configuration when `after_completion=hosted_confirmation`
     public var hostedConfirmation: PortalSessionFlowAfterCompletionHostedConfirmation?
     /// Configuration when `after_completion=redirect`
@@ -90,7 +90,7 @@ public struct PortalSessionFlowAfterCompletion: Codable {
     }
 }
 
-public struct PortalSessionFlowAfterCompletionHostedConfirmation: Codable {
+public struct PortalSessionFlowAfterCompletionHostedConfirmation: Codable, Sendable {
     /// A custom message to display to the customer after the flow is completed.
     public var customMessage: String?
     
@@ -99,7 +99,7 @@ public struct PortalSessionFlowAfterCompletionHostedConfirmation: Codable {
     }
 }
 
-public struct PortalSessionFlowAfterCompletionRedirect: Codable {
+public struct PortalSessionFlowAfterCompletionRedirect: Codable, Sendable {
     /// The URL the customer will be redirected to after the purchase is complete
     public var returnUrl: String?
     
@@ -108,7 +108,7 @@ public struct PortalSessionFlowAfterCompletionRedirect: Codable {
     }
 }
 
-public enum PortalSessionFlowAfterCompletionType: String, Codable {
+public enum PortalSessionFlowAfterCompletionType: String, Codable, Sendable {
     /// Redirects the customer to the specified `redirect.return_url` after the flow is complete.
     case redirect
     /// Displays a confirmation message on the hosted surface after the flow is complete.
@@ -117,7 +117,7 @@ public enum PortalSessionFlowAfterCompletionType: String, Codable {
     case portalHomepage = "portal_homepage"
 }
 
-public struct PortalSessionFlowSubscriptionCancel: Codable {
+public struct PortalSessionFlowSubscriptionCancel: Codable, Sendable {
     /// The ID of the subscription to be canceled.
     public var subscription: String?
     
@@ -126,7 +126,7 @@ public struct PortalSessionFlowSubscriptionCancel: Codable {
     }
 }
 
-public enum PortalSessionFlowType: String, Codable {
+public enum PortalSessionFlowType: String, Codable, Sendable {
     /// Customer will be able to cancel their subscription
     case subscriptionCancel = "subscription_cancel"
     /// Customer will be able to add a new payment method. The payment method will be set as the `customer.invoice_settings.default_payment_method`.

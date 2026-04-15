@@ -360,7 +360,7 @@ class ExpandableTests: XCTestCase {
     
     func testExpandableCollection_decodesProperly() throws {
         
-        struct SimpleType: Codable {
+        struct SimpleType: Codable, Sendable {
             @ExpandableCollection<Discount> var discounts: [String]?
         }
         

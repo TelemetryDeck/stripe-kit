@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Report Type Object](https://stripe.com/docs/api/reporting/report_type/object) .
-public struct ReportType: Codable {
+public struct ReportType: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Most recent time for which this Report Type is available. Measured in seconds since the Unix epoch.
@@ -49,7 +49,7 @@ public struct ReportType: Codable {
     }
 }
 
-public struct ReportTypeList: Codable {
+public struct ReportTypeList: Codable, Sendable {
     public var object: String
     public var data: [ReportType]?
     public var hasMore: Bool?

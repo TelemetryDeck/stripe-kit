@@ -8,7 +8,7 @@
 import Foundation
 
 /// To share the contents of a `File` object with non-Stripe users, you can create a `FileLink`. `FileLink`s contain a URL that can be used to retrieve the contents of the file without authentication.
-public struct FileLink: Codable {
+public struct FileLink: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -49,7 +49,7 @@ public struct FileLink: Codable {
     }
 }
 
-public struct FileLinkList: Codable {
+public struct FileLinkList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

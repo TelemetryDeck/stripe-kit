@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
@@ -14,13 +14,20 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.1.0"),
-        .package(url: "https://github.com/apple/swift-crypto.git", "1.0.0" ..< "4.0.0"),
+        .package(url: "https://github.com/apple/swift-crypto.git", "1.0.0" ..< "4.0.0")
     ],
     targets: [
-        .target(name: "StripeKit", dependencies: [
-            .product(name: "AsyncHTTPClient", package: "async-http-client"),
-            .product(name: "Crypto", package: "swift-crypto"),
-        ]),
+        .target(name: "StripeKit",
+                dependencies: [
+                    .product(name: "AsyncHTTPClient", package: "async-http-client"),
+                    .product(name: "Crypto", package: "swift-crypto")
+                ],
+
+                swiftSettings: [
+                    // Enable strict swift concurrency checking –- uncomment this periodically to get a glimpse
+                    // into the future:
+                    // .enableExperimentalFeature("StrictConcurrency")
+                ]),
         .testTarget(name: "StripeKitTests", dependencies: [
             .target(name: "StripeKit")
         ])

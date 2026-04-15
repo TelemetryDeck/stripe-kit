@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Review Object](https://stripe.com/docs/api/radar/reviews/object)
-public struct Review: Codable {
+public struct Review: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The charge associated with this review.
@@ -69,7 +69,7 @@ public struct Review: Codable {
     }
 }
 
-public enum ReviewReason: String, Codable {
+public enum ReviewReason: String, Codable, Sendable {
     case rule
     case manual
     case approved
@@ -78,7 +78,7 @@ public enum ReviewReason: String, Codable {
     case disputed
 }
 
-public enum ReviewClosedReason: String, Codable {
+public enum ReviewClosedReason: String, Codable, Sendable {
     case approved
     case refunded
     case refundedAsFraud = "refunded_as_fraud"
@@ -86,12 +86,12 @@ public enum ReviewClosedReason: String, Codable {
     case redacted
 }
 
-public enum ReviewOpenedReason: String, Codable {
+public enum ReviewOpenedReason: String, Codable, Sendable {
     case rule
     case manual
 }
 
-public struct ReviewIPAddressLocation: Codable {
+public struct ReviewIPAddressLocation: Codable, Sendable {
     /// The city where the payment originated.
     public var city: String?
     /// Two-letter ISO code representing the country where the payment originated.
@@ -116,7 +116,7 @@ public struct ReviewIPAddressLocation: Codable {
     }
 }
 
-public struct ReviewSession: Codable {
+public struct ReviewSession: Codable, Sendable {
     /// The browser used in this browser session (e.g., `Safari`).
     public var browser: String?
     /// Information about the device used for the browser session (e.g., `iPhone 14 Pro Max`).
@@ -137,7 +137,7 @@ public struct ReviewSession: Codable {
     }
 }
 
-public struct ReviewList: Codable {
+public struct ReviewList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

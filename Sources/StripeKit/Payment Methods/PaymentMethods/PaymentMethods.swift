@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: ACSS Debit
-public struct PaymentMethodAcssDebit: Codable {
+public struct PaymentMethodAcssDebit: Codable, Sendable {
     /// Name of the bank associated with the bank account.
     public var bankName: String?
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
@@ -34,22 +34,22 @@ public struct PaymentMethodAcssDebit: Codable {
 }
 
 // MARK: Affirm
-public struct PaymentMethodAffirm: Codable {
+public struct PaymentMethodAffirm: Codable, Sendable {
     public init(){}
 }
 
 // MARK: Afterpay Clearpay
-public struct PaymentMethodAfterpayClearpay: Codable {
+public struct PaymentMethodAfterpayClearpay: Codable, Sendable {
     public init(){}
 }
 
 // MARK: Alipay
-public struct PaymentMethodAlipay: Codable {
+public struct PaymentMethodAlipay: Codable, Sendable {
     public init(){}
 }
 
 // MARK: AU Becs Debit
-public struct PaymentMethodAuBecsDebit: Codable {
+public struct PaymentMethodAuBecsDebit: Codable, Sendable {
     /// Six-digit number identifying bank and branch associated with this bank account.
     public var bsbNumber: String?
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
@@ -67,7 +67,7 @@ public struct PaymentMethodAuBecsDebit: Codable {
 }
 
 // MARK: Bacs Debit
-public struct PaymentMethodBacsDebit: Codable {
+public struct PaymentMethodBacsDebit: Codable, Sendable {
     /// Uniquely identifies this particular bank account. You can use this attribute to check whether two bank accounts are the same.
     public var fingerprint: String?
     /// Last four digits of the bank account number
@@ -85,17 +85,17 @@ public struct PaymentMethodBacsDebit: Codable {
 }
 
 // MARK: Bancontact
-public struct PaymentMethodBancontact: Codable {
+public struct PaymentMethodBancontact: Codable, Sendable {
     public init(){}
 }
 
 // MARK: Blik
-public struct PaymentMethodBlik: Codable {
+public struct PaymentMethodBlik: Codable, Sendable {
     public init(){}
 }
 
 // MARK: Boleto
-public struct PaymentMethodBoleto: Codable {
+public struct PaymentMethodBoleto: Codable, Sendable {
     public var fingerprint: String?
     /// Uniquely identifies this customer tax_id (CNPJ or CPF)
     public var taxId: String?
@@ -108,7 +108,7 @@ public struct PaymentMethodBoleto: Codable {
 }
 
 // MARK: Card
-public struct PaymentMethodCard: Codable {
+public struct PaymentMethodCard: Codable, Sendable {
     /// Card brand. Can be `amex`, `diners`, `discover`, `eftpos_au`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     public var brand: PaymentMethodDetailsCardBrand?
     /// Checks on Card address and CVC if provided.
@@ -165,7 +165,7 @@ public struct PaymentMethodCard: Codable {
     }
 }
 
-public enum PaymentMethodDetailsCardBrand: String, Codable {
+public enum PaymentMethodDetailsCardBrand: String, Codable, Sendable {
     case amex
     case diners
     case discover
@@ -177,7 +177,7 @@ public enum PaymentMethodDetailsCardBrand: String, Codable {
     case unknown
 }
 
-public enum PaymentMethodCardNetwork: String, Codable {
+public enum PaymentMethodCardNetwork: String, Codable, Sendable {
     case amex
     case cartesBancaires = "cartes_bancaires"
     case diners
@@ -191,7 +191,7 @@ public enum PaymentMethodCardNetwork: String, Codable {
     case unknown
 }
 
-public struct PaymentMethodDetailsCardChecks: Codable {
+public struct PaymentMethodDetailsCardChecks: Codable, Sendable {
     /// If a address line1 was provided, results of the check, one of ‘pass’, ‘failed’, ‘unavailable’ or ‘unchecked’.
     public var addressLine1Check: CardValidationCheck?
     /// If a address postal code was provided, results of the check, one of ‘pass’, ‘failed’, ‘unavailable’ or ‘unchecked’.
@@ -208,7 +208,7 @@ public struct PaymentMethodDetailsCardChecks: Codable {
     }
 }
 
-public struct PaymentMethodCardGeneratedFrom: Codable {
+public struct PaymentMethodCardGeneratedFrom: Codable, Sendable {
     /// The charge that created this object.
     public var charge: String?
     /// Transaction-specific details of the payment method used in the payment.
@@ -225,7 +225,7 @@ public struct PaymentMethodCardGeneratedFrom: Codable {
     }
 }
 
-public struct PaymentMethodCardGeneratedFromPaymentMethodDetails: Codable {
+public struct PaymentMethodCardGeneratedFromPaymentMethodDetails: Codable, Sendable {
     /// This hash contains the snapshot of the `card_present` transaction-specific details which generated this card payment method.
     public var cardPresent: PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresent?
     /// The type of payment method transaction-specific details from the transaction that generated this card payment method. Always card_present.
@@ -238,7 +238,7 @@ public struct PaymentMethodCardGeneratedFromPaymentMethodDetails: Codable {
     }
 }
 
-public struct PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresent: Codable {
+public struct PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresent: Codable, Sendable {
     /// The authorized amount
     public var authorizedAmount: Int?
     /// Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
@@ -311,7 +311,7 @@ public struct PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresent: Cod
     }
 }
 
-public enum PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReadMethod: String, Codable {
+public enum PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReadMethod: String, Codable, Sendable {
     /// Inserting a chip card into the card reader.
     case contactEmv = "contact_emv"
     /// Tapping a contactless-enabled chip card or mobile wallet.
@@ -324,7 +324,7 @@ public enum PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReadMet
     case contactlessMagstripeMode = "contactless_magstripe_mode"
 }
 
-public struct PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceipt: Codable {
+public struct PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceipt: Codable, Sendable {
     /// The type of account being debited or credited
     public var accountType: PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceiptAccountType?
     /// EMV tag 9F26, cryptogram generated by the integrated circuit chip.
@@ -365,7 +365,7 @@ public struct PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentRecei
     }
 }
 
-public enum PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceiptAccountType: String, Codable {
+public enum PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceiptAccountType: String, Codable, Sendable {
     /// A credit account, as when using a credit card
     case credit
     /// A checking account, as when using a debit card
@@ -376,7 +376,7 @@ public enum PaymentMethodCardGeneratedFromPaymentMethodDetailsCardPresentReceipt
     case unknown
 }
 
-public struct PaymentMethodCardNetworks: Codable {
+public struct PaymentMethodCardNetworks: Codable, Sendable {
     /// All available networks for the card.
     public var available: [String]?
     /// The preferred network for the card.
@@ -388,7 +388,7 @@ public struct PaymentMethodCardNetworks: Codable {
     }
 }
 
-public struct PaymentMethodCardThreeDSecureUsage: Codable {
+public struct PaymentMethodCardThreeDSecureUsage: Codable, Sendable {
     /// Whether 3D Secure is supported on this card.
     public var supported: Bool?
     
@@ -397,7 +397,7 @@ public struct PaymentMethodCardThreeDSecureUsage: Codable {
     }
 }
 
-public struct PaymentMethodCardWallet: Codable {
+public struct PaymentMethodCardWallet: Codable, Sendable {
     /// If this is a `amex_express_checkout` card wallet, this hash contains details about the wallet.
     /// Stripe does not [provide any details](https://stripe.com/docs/api/payment_methods/object#payment_method_object-card-wallet-amex_express_checkout) about possible values so this will remain nil/unimplemented.
     public var amexExpressCheckout: PaymentMethodCardWalletAmexExpressCheckout?
@@ -438,11 +438,11 @@ public struct PaymentMethodCardWallet: Codable {
     }
 }
 
-public struct PaymentMethodCardWalletAmexExpressCheckout: Codable {
+public struct PaymentMethodCardWalletAmexExpressCheckout: Codable, Sendable {
     public init() {}
 }
 
-public struct PaymentMethodCardWalletApplePay: Codable {
+public struct PaymentMethodCardWalletApplePay: Codable, Sendable {
     public var type: String?
     
     public init(type: String? = nil) {
@@ -450,11 +450,11 @@ public struct PaymentMethodCardWalletApplePay: Codable {
     }
 }
 
-public struct PaymentMethodCardWalletGooglePay: Codable {
+public struct PaymentMethodCardWalletGooglePay: Codable, Sendable {
     public init() {}
 }
 
-public struct PaymentMethodCardWalletMasterPass: Codable {
+public struct PaymentMethodCardWalletMasterPass: Codable, Sendable {
     /// Owner’s verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     public var billingAddress: Address?
     /// Owner’s verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
@@ -475,11 +475,11 @@ public struct PaymentMethodCardWalletMasterPass: Codable {
     }
 }
 
-public struct PaymentMethodCardWalletSamsungPay: Codable {
+public struct PaymentMethodCardWalletSamsungPay: Codable, Sendable {
     public init() {}
 }
 
-public enum PaymentMethodDetailsCardWalletType: String, Codable {
+public enum PaymentMethodDetailsCardWalletType: String, Codable, Sendable {
     case amexExpressCheckout = "amex_express_checkout"
     case applePay = "apple_pay"
     case googlePay = "google_pay"
@@ -489,7 +489,7 @@ public enum PaymentMethodDetailsCardWalletType: String, Codable {
     case link
 }
 
-public struct PaymentMethodCardWalletVisaCheckout: Codable {
+public struct PaymentMethodCardWalletVisaCheckout: Codable, Sendable {
     /// Owner’s verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
     public var billingAddress: Address?
     /// Owner’s verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
@@ -511,7 +511,7 @@ public struct PaymentMethodCardWalletVisaCheckout: Codable {
 }
 
 // MARK: Card Present
-public struct PaymentMethodCardPresent: Codable {
+public struct PaymentMethodCardPresent: Codable, Sendable {
     /// Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
     public var brand: PaymentMethodDetailsCardBrand?
     /// The cardholder name as read from the card, in ISO 7813 format. May include alphanumeric characters, special characters and first/last name separator (/). In some cases, the cardholder name may not be available depending on how the issuer has configured the card. Cardholder name is typically not available on swipe or contactless payments, such as those made with Apple Pay and Google Pay.
@@ -556,7 +556,7 @@ public struct PaymentMethodCardPresent: Codable {
     }
 }
 
-public enum PaymentMethodCardPresentReadMethod: String, Codable {
+public enum PaymentMethodCardPresentReadMethod: String, Codable, Sendable {
     /// Inserting a chip card into the card reader.
     case contactEmv = "contact_emv"
     /// Tapping a contactless-enabled chip card or mobile wallet.
@@ -570,17 +570,17 @@ public enum PaymentMethodCardPresentReadMethod: String, Codable {
 }
 
 // MARK: Cashapp
-public struct PaymentMethodCashapp: Codable {
+public struct PaymentMethodCashapp: Codable, Sendable {
     public init() { }
 }
 
 // MARK: CustomerBalance
-public struct PaymentMethodCustomerBalance: Codable {
+public struct PaymentMethodCustomerBalance: Codable, Sendable {
     public init() { }
 }
 
 // MARK: EPS
-public struct PaymentMethodEps: Codable {
+public struct PaymentMethodEps: Codable, Sendable {
     /// The customer’s bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `deutsche_bank_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
     public var bank: PaymentMethodEpsBank?
     
@@ -589,7 +589,7 @@ public struct PaymentMethodEps: Codable {
     }
 }
 
-public enum PaymentMethodEpsBank: String, Codable {
+public enum PaymentMethodEpsBank: String, Codable, Sendable {
     case arzteUndApothekerBank = "arzte_und_apotheker_bank"
     case austrianAnadiBankAg = "austrian_anadi_bank_ag"
     case bankAustria = "bank_austria"
@@ -621,12 +621,12 @@ public enum PaymentMethodEpsBank: String, Codable {
 }
     
 // MARK: FPX
-public struct PaymentMethodFpx: Codable {
+public struct PaymentMethodFpx: Codable, Sendable {
     /// The customer’s bank, if provided. Can be one of `affin_bank`, `agrobank`, `alliance_bank`, `ambank`, `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`, `maybank2e`, `pb_enterprise`, or  `bank_of_china`.
     public var bank: PaymentMethodFpxBank?
 }
 
-public enum PaymentMethodFpxBank: String, Codable {
+public enum PaymentMethodFpxBank: String, Codable, Sendable {
     case affinBank = "affin_bank"
     case agrobank = "agrobank"
     case allianceBank = "alliance_bank"
@@ -652,17 +652,17 @@ public enum PaymentMethodFpxBank: String, Codable {
 }
     
 // MARK: Giropay
-public struct PaymentMethodGiropay: Codable {
+public struct PaymentMethodGiropay: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Grabpay
-public struct PaymentMethodGrabpay: Codable {
+public struct PaymentMethodGrabpay: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Ideal
-public struct PaymentMethodIdeal: Codable {
+public struct PaymentMethodIdeal: Codable, Sendable {
     /// The customer’s bank, if provided. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`,`van_lanschot` or `yoursafe`.
     public var bank: PaymentMethodIdealBank?
     /// The Bank Identifier Code of the customer’s bank, if the bank was provided.
@@ -674,7 +674,7 @@ public struct PaymentMethodIdeal: Codable {
     }
 }
 
-public enum PaymentMethodIdealBank: String, Codable {
+public enum PaymentMethodIdealBank: String, Codable, Sendable {
     case abnAmro = "abn_amro"
     case asnBank = "asn_bank"
     case bunq
@@ -692,7 +692,7 @@ public enum PaymentMethodIdealBank: String, Codable {
 }
 
 // MARK: InteracPresent
-public struct PaymentMethodInteractPresent: Codable {
+public struct PaymentMethodInteractPresent: Codable, Sendable {
     /// Card brand. Can be interac, mastercard or visa.
     public var brand: String?
     /// The cardholder name as read from the card, in ISO 7813 format. May include alphanumeric characters, special characters and first/last name separator (/). In some cases, the cardholder name may not be available depending on how the issuer has configured the card. Cardholder name is typically not available on swipe or contactless payments, such as those made with Apple Pay and Google Pay.
@@ -742,7 +742,7 @@ public struct PaymentMethodInteractPresent: Codable {
     }
 }
 
-public enum PaymentMethodInteractPresentReadMethod: String, Codable {
+public enum PaymentMethodInteractPresentReadMethod: String, Codable, Sendable {
     /// Inserting a chip card into the card reader.
     case contactEmv = "contact_emv"
     /// Tapping a contactless-enabled chip card or mobile wallet.
@@ -756,7 +756,7 @@ public enum PaymentMethodInteractPresentReadMethod: String, Codable {
 }
 
 // MARK: Klarna
-public struct PaymentMethodKlarna: Codable {
+public struct PaymentMethodKlarna: Codable, Sendable {
     /// The customer’s date of birth, if provided.
     /// This field is not included by default. To include it in the response, expand the dob field.
     public var dob: PersonDOB?
@@ -767,12 +767,12 @@ public struct PaymentMethodKlarna: Codable {
 }
 
 // MARK: Konbini
-public struct PaymentMethodKonbini: Codable {
+public struct PaymentMethodKonbini: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Link
-public struct PaymentMethodLink: Codable {
+public struct PaymentMethodLink: Codable, Sendable {
     /// Account owner’s email address.
     public var email: String?
     /// Token used for persistent Link logins.
@@ -785,12 +785,12 @@ public struct PaymentMethodLink: Codable {
 }
 
 // MARK: OXXO
-public struct PaymentMethodOXXO: Codable {
+public struct PaymentMethodOXXO: Codable, Sendable {
     public init() {}
 }
 
 // MARK: P24
-public struct PaymentMethodP24: Codable {
+public struct PaymentMethodP24: Codable, Sendable {
     /// The customer’s bank, if provided.
     public var bank: PaymentMethodP24Bank?
     
@@ -799,7 +799,7 @@ public struct PaymentMethodP24: Codable {
     }
 }
 
-public enum PaymentMethodP24Bank: String, Codable {
+public enum PaymentMethodP24Bank: String, Codable, Sendable {
     case ing = "ing"
     case citiHandlowy = "citi_handlowy"
     case tmobileUsbugiBankowe = "tmobile_usbugi_bankowe"
@@ -828,22 +828,22 @@ public enum PaymentMethodP24Bank: String, Codable {
 }
 
 // MARK: Paynow
-public struct PaymentMethodPaynow: Codable {
+public struct PaymentMethodPaynow: Codable, Sendable {
     public init() {}
 }
 
 // MARK: Pix
-public struct PaymentMethodPix: Codable {
+public struct PaymentMethodPix: Codable, Sendable {
     public init() {}
 }
 
 // MARK: PromptPay
-public struct PaymentMethodPromptPay: Codable {
+public struct PaymentMethodPromptPay: Codable, Sendable {
     public init() {}
 }
  
 // MARK: Sepa Debit
-public struct PaymentMethodSepaDebit: Codable {
+public struct PaymentMethodSepaDebit: Codable, Sendable {
     /// Bank code of bank associated with the bank account.
     public var bankCode: String?
     /// Branch code of bank associated with the bank account.
@@ -872,7 +872,7 @@ public struct PaymentMethodSepaDebit: Codable {
     }
 }
 
-public struct PaymentMethodSepaDebitGeneratedFrom: Codable {
+public struct PaymentMethodSepaDebitGeneratedFrom: Codable, Sendable {
     /// The ID of the Charge that generated this PaymentMethod, if any.
     @Expandable<Charge> public var charge: String?
     /// The ID of the SetupAttempt that generated this PaymentMethod, if any.
@@ -885,7 +885,7 @@ public struct PaymentMethodSepaDebitGeneratedFrom: Codable {
 }
 
 // MARK: Sofort
-public struct PaymentMethodSofort: Codable {
+public struct PaymentMethodSofort: Codable, Sendable {
     /// Two-letter ISO code representing the country the bank account is located in.
     public var country: String?
     
@@ -895,7 +895,7 @@ public struct PaymentMethodSofort: Codable {
 }
 
 // MARK: US Bank Account
-public struct PaymentMethodUSBankAccount: Codable {
+public struct PaymentMethodUSBankAccount: Codable, Sendable {
     /// Account holder type: individual or company.
     public var accountHolderType: PaymentMethodUSBankAccountAccountHolderType?
     /// Account type: checkings or savings. Defaults to checking if omitted.
@@ -936,21 +936,21 @@ public struct PaymentMethodUSBankAccount: Codable {
     }
 }
 
-public enum PaymentMethodUSBankAccountAccountHolderType: String, Codable {
+public enum PaymentMethodUSBankAccountAccountHolderType: String, Codable, Sendable {
     /// Account belongs to an individual
     case individual
     /// Account belongs to a company
     case company
 }
 
-public enum PaymentMethodUSBankAccountAccountType: String, Codable {
+public enum PaymentMethodUSBankAccountAccountType: String, Codable, Sendable {
     /// Bank account type is checking
     case checking
     /// Bank account type is savings
     case savings
 }
 
-public struct PaymentMethodUSBankAccountNetworks: Codable {
+public struct PaymentMethodUSBankAccountNetworks: Codable, Sendable {
     /// All available networks for the card.
     public var available: [String]?
     /// The preferred network for the card.
@@ -962,7 +962,7 @@ public struct PaymentMethodUSBankAccountNetworks: Codable {
     }
 }
 
-public struct PaymentMethodUSBankAccountStatusDetails: Codable {
+public struct PaymentMethodUSBankAccountStatusDetails: Codable, Sendable {
     /// Contains more information about the underlying block. This field will only be rendered if the PaymentMethod is blocked.
     public var blocked: PaymentMethodUSBankAccountStatusDetailsBlocked?
     
@@ -971,7 +971,7 @@ public struct PaymentMethodUSBankAccountStatusDetails: Codable {
     }
 }
 
-public struct PaymentMethodUSBankAccountStatusDetailsBlocked: Codable {
+public struct PaymentMethodUSBankAccountStatusDetailsBlocked: Codable, Sendable {
     /// The ACH network code that resulted in this block.
     public var network: PaymentMethodUSBankAccountStatusDetailsBlockedNetwork?
     /// The reason why this PaymentMethod’s fingerprint has been blocked
@@ -984,7 +984,7 @@ public struct PaymentMethodUSBankAccountStatusDetailsBlocked: Codable {
     }
 }
 
-public enum PaymentMethodUSBankAccountStatusDetailsBlockedNetwork: String, Codable {
+public enum PaymentMethodUSBankAccountStatusDetailsBlockedNetwork: String, Codable, Sendable {
     /// Account Closed
     case R02
     /// No Account, Unable to Locate Account
@@ -1011,7 +1011,7 @@ public enum PaymentMethodUSBankAccountStatusDetailsBlockedNetwork: String, Codab
     case R31
 }
 
-public enum PaymentMethodUSBankAccountStatusDetailsBlockedReason: String, Codable {
+public enum PaymentMethodUSBankAccountStatusDetailsBlockedReason: String, Codable, Sendable {
     /// Customer has disputed a previous payment with their bank. If the `network_code` is R29, please confirm that Stripe’s Company IDs are allowlisted before attempting additional payments.
     case debitNotAuthorized = "debit_not_authorized"
     /// Bank account has been closed.
@@ -1027,6 +1027,6 @@ public enum PaymentMethodUSBankAccountStatusDetailsBlockedReason: String, Codabl
 }
 
 // MARK: WechatPay
-public struct PaymentMethodWechatPay: Codable {
+public struct PaymentMethodWechatPay: Codable, Sendable {
     public init() {}
 }

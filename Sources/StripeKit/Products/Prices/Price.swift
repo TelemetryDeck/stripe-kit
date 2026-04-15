@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Price Object](https://stripe.com/docs/api/prices/object)
-public struct Price: Codable {
+public struct Price: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Whether the price can be used for new purchases.
@@ -97,7 +97,7 @@ public struct Price: Codable {
     }
 }
 
-public struct PriceRecurring: Codable {
+public struct PriceRecurring: Codable, Sendable {
     /// Specifies a usage aggregation strategy for prices of `usage_type=metered`. Allowed values are sum for summing up all usage during a period, `last_during_period` for using the last usage record reported within a period, `last_ever` for using the last usage record ever (across period bounds) or `max` which uses the usage record with the maximum reported usage during a period. Defaults to `sum`.
     public var aggregateUsage: PriceRecurringAggregateUsage?
     /// The frequency at which a subscription is billed. One of `day`, `week`, `month` or `year`.
@@ -132,24 +132,24 @@ public struct PriceRecurring: Codable {
     }
 }
 
-public enum PriceRecurringAggregateUsage: String, Codable {
+public enum PriceRecurringAggregateUsage: String, Codable, Sendable {
     case sum
     case lastDuringPeriod = "last_during_period"
     case lastEver = "last_ever"
     case max
 }
 
-public enum PriceType: String, Codable {
+public enum PriceType: String, Codable, Sendable {
     case oneTime = "one_time"
     case recurring
 }
 
-public enum PriceBillingScheme: String, Codable {
+public enum PriceBillingScheme: String, Codable, Sendable {
     case perUnit = "per_unit"
     case tiered
 }
 
-public struct PriceCurrencyOption: Codable {
+public struct PriceCurrencyOption: Codable, Sendable {
     /// When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment Links.
     public var customUnitAmount: PriceCurrencyOptionCustomUnitAmount?
     /// Only required if a default tax behavior was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it cannot be changed.
@@ -174,7 +174,7 @@ public struct PriceCurrencyOption: Codable {
     }
 }
 
-public struct PriceCurrencyOptionCustomUnitAmount: Codable {
+public struct PriceCurrencyOptionCustomUnitAmount: Codable, Sendable {
     /// The maximum unit amount the customer can specify for this item.
     public var maximum: Int?
     /// The minimum unit amount the customer can specify for this item. Must be at least the minimum charge amount.
@@ -191,13 +191,13 @@ public struct PriceCurrencyOptionCustomUnitAmount: Codable {
     }
 }
 
-public enum PriceTaxBehavior: String, Codable {
+public enum PriceTaxBehavior: String, Codable, Sendable {
     case inclusive
     case exclusive
     case unspecified
 }
 
-public struct PriceTier: Codable {
+public struct PriceTier: Codable, Sendable {
     /// Price for the entire tier.
     public var flatAmount: Int?
     /// Same as `flat_amount`, but contains a decimal value with at most 12 decimal places.
@@ -222,7 +222,7 @@ public struct PriceTier: Codable {
     }
 }
 
-public struct PriceCustomUnitAmount: Codable {
+public struct PriceCustomUnitAmount: Codable, Sendable {
     /// The maximum unit amount the customer can specify for this item.
     public var maximum: Int?
     /// The minimum unit amount the customer can specify for this item. Must be at least the minimum charge amount.
@@ -239,12 +239,12 @@ public struct PriceCustomUnitAmount: Codable {
     }
 }
 
-public enum PriceTierMode: String, Codable {
+public enum PriceTierMode: String, Codable, Sendable {
     case graduated
     case volume
 }
 
-public struct PriceTransformQuantity: Codable {
+public struct PriceTransformQuantity: Codable, Sendable {
     /// Divide usage by this number.
     public var divideBy: Int?
     /// After division, either round the result `up` or `down`.
@@ -257,12 +257,12 @@ public struct PriceTransformQuantity: Codable {
     }
 }
 
-public enum PriceTransformQuantityRound: String, Codable {
+public enum PriceTransformQuantityRound: String, Codable, Sendable {
     case up
     case down
 }
 
-public struct PriceSearchResult: Codable {
+public struct PriceSearchResult: Codable, Sendable {
     /// A string describing the object type returned.
     public var object: String
     /// A list of prices, paginated by any request parameters.
@@ -291,7 +291,7 @@ public struct PriceSearchResult: Codable {
     }
 }
 
-public struct PriceList: Codable {
+public struct PriceList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

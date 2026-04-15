@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Secret: Codable {
+public struct Secret: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -48,7 +48,7 @@ public struct Secret: Codable {
     }
 }
 
-public struct SecretScope: Codable {
+public struct SecretScope: Codable, Sendable {
     /// The secret scope type.
     public var type: SecretScopeType?
     /// The user ID, if type is set to “user”
@@ -60,14 +60,14 @@ public struct SecretScope: Codable {
     }
 }
 
-public enum SecretScopeType: String, Codable {
+public enum SecretScopeType: String, Codable, Sendable {
     /// A secret scoped to a specific user. Use this for oauth tokens or other per-user secrets. If this is set, `scope.user` must also be set.
     case user
     /// A  secret scoped to an account. Use this for API keys or other secrets that should be accessible by all UI Extension contexts.
     case account
 }
 
-public struct SecretList: Codable {
+public struct SecretList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

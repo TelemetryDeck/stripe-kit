@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PaymentLink: Codable {
+public struct PaymentLink: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Whether the payment link’s `url` is active. If `false`, customers visiting the URL will be shown a page saying that the link has been deactivated.
@@ -132,7 +132,7 @@ public struct PaymentLink: Codable {
     }
 }
 
-public struct PaymentLinkLineItem: Codable {
+public struct PaymentLinkLineItem: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// String representing the object’s type. Objects of the same type share the same value.
@@ -185,7 +185,7 @@ public struct PaymentLinkLineItem: Codable {
     }
 }
 
-public struct PaymentLinkLineItemDiscount: Codable {
+public struct PaymentLinkLineItemDiscount: Codable, Sendable {
     /// The amount discounted.
     public var amount: Int?
     /// The discount applied.
@@ -197,7 +197,7 @@ public struct PaymentLinkLineItemDiscount: Codable {
     }
 }
 
-public struct PaymentLinkLineItemTax: Codable {
+public struct PaymentLinkLineItemTax: Codable, Sendable {
     /// Amount of tax applied for this rate.
     public var amount: Int?
     /// The tax rate applied.
@@ -209,7 +209,7 @@ public struct PaymentLinkLineItemTax: Codable {
     }
 }
 
-public struct PaymentLinkLineItemList: Codable {
+public struct PaymentLinkLineItemList: Codable, Sendable {
     /// String representing the object’s type. Objects of the same type share the same value. Always has the value `list`.
     public var object: String
     /// Details about each object.
@@ -230,7 +230,7 @@ public struct PaymentLinkLineItemList: Codable {
     }
 }
 
-public struct PaymentLinkAfterCompletion: Codable {
+public struct PaymentLinkAfterCompletion: Codable, Sendable {
     /// Configuration when `type=hosted_confirmation`
     public var hostedConfirmation: PaymentLinkAfterCompletionHostedConfirmation?
     /// Configuration when `type=redirect`
@@ -247,7 +247,7 @@ public struct PaymentLinkAfterCompletion: Codable {
     }
 }
 
-public struct PaymentLinkAfterCompletionHostedConfirmation: Codable {
+public struct PaymentLinkAfterCompletionHostedConfirmation: Codable, Sendable {
     /// The custom message that is displayed to the customer after the purchase is complete.
     public var message: String?
     
@@ -256,7 +256,7 @@ public struct PaymentLinkAfterCompletionHostedConfirmation: Codable {
     }
 }
 
-public struct PaymentLinkAfterCompletionRedirect: Codable {
+public struct PaymentLinkAfterCompletionRedirect: Codable, Sendable {
     /// The URL the customer will be redirected to after the purchase is complete
     public var url: String?
     
@@ -265,14 +265,14 @@ public struct PaymentLinkAfterCompletionRedirect: Codable {
     }
 }
 
-public enum PaymentLinkAfterCompletionType: String, Codable {
+public enum PaymentLinkAfterCompletionType: String, Codable, Sendable {
     /// Redirects the customer to the specified url after the purchase is complete.
     case redirect
     /// Displays a message on the hosted surface after the purchase is complete.
     case hostedConfirmation = "hosted_confirmation"
 }
 
-public struct PaymentLinkAutomaticTax: Codable {
+public struct PaymentLinkAutomaticTax: Codable, Sendable {
     /// If `true`, tax will be calculated automatically using the customer’s location.
     public var enabled: Bool?
     
@@ -281,14 +281,14 @@ public struct PaymentLinkAutomaticTax: Codable {
     }
 }
 
-public enum PaymentLinkBillingAddressCollection: String, Codable {
+public enum PaymentLinkBillingAddressCollection: String, Codable, Sendable {
     /// Checkout will only collect the billing address when necessary. When using `automatic_tax`, Checkout will collect the minimum number of fields required for tax calculation
     case auto
     /// Checkout will always collect the customer’s billing address.
     case `required`
 }
 
-public struct PaymentLinkConsentCollection: Codable {
+public struct PaymentLinkConsentCollection: Codable, Sendable {
     /// If set to `auto`, enables the collection of customer consent for promotional communications.
     public var promotions: String?
     /// If set to `required`, it requires cutomers to accept the terms of service before being able to pay. If set to none, customers won’t be shown a checkbox to accept the terms of service.
@@ -300,7 +300,7 @@ public struct PaymentLinkConsentCollection: Codable {
     }
 }
 
-public struct PaymentLinkCustomField: Codable {
+public struct PaymentLinkCustomField: Codable, Sendable {
     /// Configuration for `type=dropdown` fields.
     public var dropdown: PaymentLinkCustomFieldDropdown?
     /// String of your choice that your integration can use to reconcile this field. Must be unique to this field, alphanumeric, and up to 200 characters.
@@ -333,7 +333,7 @@ public struct PaymentLinkCustomField: Codable {
     }
 }
 
-public struct PaymentLinkCustomFieldDropdown: Codable {
+public struct PaymentLinkCustomFieldDropdown: Codable, Sendable {
     /// The options available for the customer to select. Up to 200 options allowed
     public var options: [PaymentLinkCustomFieldDropdownOption]?
     /// The option selected by the customer. This will be the `value` for the option.
@@ -346,7 +346,7 @@ public struct PaymentLinkCustomFieldDropdown: Codable {
     }
 }
 
-public struct PaymentLinkCustomFieldDropdownOption: Codable {
+public struct PaymentLinkCustomFieldDropdownOption: Codable, Sendable {
     /// The label for the option, displayed to the customer. Up to 100 characters.
     public var label: String?
     /// The value for this option, not displayed to the customer, used by your integration to reconcile the option selected by the customer. Must be unique to this option, alphanumeric, and up to 100 characters.
@@ -358,7 +358,7 @@ public struct PaymentLinkCustomFieldDropdownOption: Codable {
     }
 }
 
-public struct PaymentLinkCustomFieldLabel: Codable {
+public struct PaymentLinkCustomFieldLabel: Codable, Sendable {
     /// Custom text for the label, displayed to the customer. Up to 50 characters.
     public var custom: String?
     ///The type of the label.
@@ -370,12 +370,12 @@ public struct PaymentLinkCustomFieldLabel: Codable {
     }
 }
 
-public enum PaymentLinkCustomFieldLabelType: String, Codable {
+public enum PaymentLinkCustomFieldLabelType: String, Codable, Sendable {
     /// Set a custom label for the field.
     case custom
 }
 
-public struct PaymentLinkCustomFieldNumeric: Codable {
+public struct PaymentLinkCustomFieldNumeric: Codable, Sendable {
     /// The maximum character length constraint for the customer’s input.
     public var maximumLength: Int?
     /// The minimum character length requirement for the customer’s input.
@@ -392,7 +392,7 @@ public struct PaymentLinkCustomFieldNumeric: Codable {
     }
 }
 
-public struct PaymentLinkCustomFieldText: Codable {
+public struct PaymentLinkCustomFieldText: Codable, Sendable {
     /// The maximum character length constraint for the customer’s input.
     public var maximumLength: Int?
     /// The minimum character length requirement for the customer’s input.
@@ -409,7 +409,7 @@ public struct PaymentLinkCustomFieldText: Codable {
     }
 }
 
-public enum PaymentLinkCustomFieldType: String, Codable {
+public enum PaymentLinkCustomFieldType: String, Codable, Sendable {
     /// Collect a string field from your customer.
     case text
     /// Collect a numbers-only field from your customer.
@@ -418,7 +418,7 @@ public enum PaymentLinkCustomFieldType: String, Codable {
     case dropdown
 }
 
-public struct PaymentLinkCustomText: Codable {
+public struct PaymentLinkCustomText: Codable, Sendable {
     /// Custom text that should be displayed alongside shipping address collection.
     public var shippingAddress: PaymentLinkCustomTextShippingAddress?
     /// Custom text that should be displayed alongside the payment confirmation button.
@@ -431,7 +431,7 @@ public struct PaymentLinkCustomText: Codable {
     }
 }
 
-public struct PaymentLinkCustomTextShippingAddress: Codable {
+public struct PaymentLinkCustomTextShippingAddress: Codable, Sendable {
     /// Text may be up to 1000 characters in length.
     public var message: String?
     
@@ -440,7 +440,7 @@ public struct PaymentLinkCustomTextShippingAddress: Codable {
     }
 }
 
-public struct PaymentLinkCustomTextSubmit: Codable {
+public struct PaymentLinkCustomTextSubmit: Codable, Sendable {
     /// Text may be up to 1000 characters in length.
     public var message: String?
     
@@ -449,13 +449,13 @@ public struct PaymentLinkCustomTextSubmit: Codable {
     }
 }
 
-public enum PaymentLinkCustomerCreation: String, Codable {
+public enum PaymentLinkCustomerCreation: String, Codable, Sendable {
     /// The Checkout Session will only create a Customer if it is required for Session confirmation. Currently, only `subscription` mode Sessions require a Customer.
     case ifRequired = "if_required"
     /// The Checkout Session will always create a Customer when a Session confirmation is attempted.
     case always
 }
-public struct PaymentLinkInvoiceCreation: Codable {
+public struct PaymentLinkInvoiceCreation: Codable, Sendable {
     /// Indicates whether invoice creation is enabled for the Checkout Session.
     public var enabled: Bool?
     /// Parameters passed when creating invoices for payment-mode Checkout Sessions.
@@ -467,7 +467,7 @@ public struct PaymentLinkInvoiceCreation: Codable {
     }
 }
 
-public struct PaymentLinkInvoiceCreationInvoiceData: Codable {
+public struct PaymentLinkInvoiceCreationInvoiceData: Codable, Sendable {
     /// The account tax IDs associated with the invoice
     @ExpandableCollection<TaxID> public var accountTaxIds: [String]?
     /// Custom fields displayed on the invoice.
@@ -496,7 +496,7 @@ public struct PaymentLinkInvoiceCreationInvoiceData: Codable {
     }
 }
 
-public struct PaymentLinkInvoiceCreationInvoiceDataCustomFields: Codable {
+public struct PaymentLinkInvoiceCreationInvoiceDataCustomFields: Codable, Sendable {
     /// The name of the custom field.
     public var name: String?
     /// The value of the custom field.
@@ -508,7 +508,7 @@ public struct PaymentLinkInvoiceCreationInvoiceDataCustomFields: Codable {
     }
 }
 
-public struct PaymentLinkInvoiceCreationInvoiceDataRenderingOptions: Codable {
+public struct PaymentLinkInvoiceCreationInvoiceDataRenderingOptions: Codable, Sendable {
     /// How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
     public var amountTaxDisplay: String?
     
@@ -517,7 +517,7 @@ public struct PaymentLinkInvoiceCreationInvoiceDataRenderingOptions: Codable {
     }
 }
 
-public struct PaymentLinkPaymentIntentData: Codable {
+public struct PaymentLinkPaymentIntentData: Codable, Sendable {
     /// Indicates when the funds will be captured from the customer’s account.
     public var captureMethod: PaymentLinkPaymentIntentDataCaptureMethod?
     /// Indicates that you intend to make future payments with the payment method collected during checkout.
@@ -530,7 +530,7 @@ public struct PaymentLinkPaymentIntentData: Codable {
     }
 }
 
-public enum PaymentLinkPaymentIntentDataCaptureMethod: String, Codable {
+public enum PaymentLinkPaymentIntentDataCaptureMethod: String, Codable, Sendable {
     /// (Default) Stripe automatically captures funds when the customer authorizes the payment.
     case automatic
     /// Stripe asynchronously captures funds when the customer authorizes the payment. Recommended over `capture_method=automatic` due to improved latency, but [may require additional integration changes](https://stripe.com/docs/payments/payment-intents/asynchronous-capture-automatic-async) .
@@ -539,21 +539,21 @@ public enum PaymentLinkPaymentIntentDataCaptureMethod: String, Codable {
     case manual
 }
 
-public enum PaymentLinkPaymentIntentDataSetupFutureUsage: String, Codable {
+public enum PaymentLinkPaymentIntentDataSetupFutureUsage: String, Codable, Sendable {
     /// Use `on_session` if you intend to only reuse the payment method when your customer is present in your checkout flow.
     case onSession = "on_session"
     /// Use `off_session` if your customer may or may not be present in your checkout flow.
     case offSession = "off_session"
 }
 
-public enum PaymentLinkPaymentMethodCollection: String, Codable {
+public enum PaymentLinkPaymentMethodCollection: String, Codable, Sendable {
     /// The Checkout Session will always collect a PaymentMethod.
     case always
     /// The Checkout Session will only collect a PaymentMethod if there is an amount due.
     case ifRequired = "if_required"
 }
 
-public struct PaymentLinkPhoneNumberCollection: Codable {
+public struct PaymentLinkPhoneNumberCollection: Codable, Sendable {
     /// Indicates whether phone number collection is enabled for the session
     public var enabled: Bool
     
@@ -562,7 +562,7 @@ public struct PaymentLinkPhoneNumberCollection: Codable {
     }
 }
 
-public struct PaymentLinkShippingAddressCollection: Codable {
+public struct PaymentLinkShippingAddressCollection: Codable, Sendable {
     /// An array of two-letter ISO country codes representing which countries Checkout should provide as options for shipping locations. Unsupported country codes: `AS, CX, CC, CU, HM, IR, KP, MH, FM, NF, MP, PW, SD, SY, UM, VI`.
     public var allowedCountries: [String]?
     
@@ -571,7 +571,7 @@ public struct PaymentLinkShippingAddressCollection: Codable {
     }
 }
 
-public struct PaymentLinkShippingOption: Codable {
+public struct PaymentLinkShippingOption: Codable, Sendable {
     /// A non-negative integer in cents representing how much to charge.
     public var shippingAmount: Int?
     /// The shipping rate.
@@ -583,14 +583,14 @@ public struct PaymentLinkShippingOption: Codable {
     }
 }
 
-public enum PaymentLinkSubmitType: String, Codable {
+public enum PaymentLinkSubmitType: String, Codable, Sendable {
     case auto
     case book
     case donate
     case pay
 }
 
-public struct PaymentLinkSubscriptionData: Codable {
+public struct PaymentLinkSubscriptionData: Codable, Sendable {
     /// The subscription’s description, meant to be displayable to the customer. Use this field to optionally store an explanation of the subscription.
     public var description: String?
     /// Integer representing the number of trial period days before the customer is charged for the first time.
@@ -602,7 +602,7 @@ public struct PaymentLinkSubscriptionData: Codable {
     }
 }
 
-public struct PaymentLinkTaxIdCollection: Codable {
+public struct PaymentLinkTaxIdCollection: Codable, Sendable {
     /// Indicates whether tax ID collection is enabled for the session
     public var enabled: Bool?
     
@@ -611,7 +611,7 @@ public struct PaymentLinkTaxIdCollection: Codable {
     }
 }
 
-public struct PaymentLinkTransferData: Codable {
+public struct PaymentLinkTransferData: Codable, Sendable {
     /// The amount in cents that will be transferred to the destination account. By default, the entire amount is transferred to the destination.
     public var amount: Int?
     /// The connected account receiving the transfer.
@@ -623,7 +623,7 @@ public struct PaymentLinkTransferData: Codable {
     }
 }
 
-public struct PaymentLinkList: Codable {
+public struct PaymentLinkList: Codable, Sendable {
     /// String representing the object’s type. Objects of the same type share the same value. Always has the value `list`.
     public var object: String
     /// Details about each object.

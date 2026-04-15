@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Webhook Object](https://stripe.com/docs/api/webhook_endpoints)
-public struct Webhook: Codable {
+public struct Webhook: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The API version events are rendered as for this webhook endpoint.
@@ -61,12 +61,12 @@ public struct Webhook: Codable {
     }
 }
 
-public enum WebhookStatus: String, Codable {
+public enum WebhookStatus: String, Codable, Sendable {
     case enabled
     case disabled
 }
 
-public struct WebhookList: Codable {
+public struct WebhookList: Codable, Sendable {
     public var object: String
     public var data: [Webhook]?
     public var hasMore: Bool?

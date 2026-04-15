@@ -7,7 +7,7 @@
 //
 
 /// External accounts list. [See here](https://stripe.com/docs/api/accounts/object#account_object-external_accounts)
-public struct ConnectAccountExternalAccountsList: Codable {
+public struct ConnectAccountExternalAccountsList: Codable, Sendable {
     /// String representing the object’s type. Objects of the same type share the same value. Always has the value list.
     public var object: String
     /**

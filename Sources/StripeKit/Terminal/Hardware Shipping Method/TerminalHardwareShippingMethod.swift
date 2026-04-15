@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TerminalHardwareShippingMethod: Codable {
+public struct TerminalHardwareShippingMethod: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The country in which this Shipping Method is available.
@@ -40,7 +40,7 @@ public struct TerminalHardwareShippingMethod: Codable {
     }
 }
 
-public struct TerminalHardwareShippingMethodEstimatedDeliveryWindow: Codable {
+public struct TerminalHardwareShippingMethodEstimatedDeliveryWindow: Codable, Sendable {
     /// Maximum estimated delivery date in ISO 8601 format.
     public var maximumDate: String?
     /// Minimum estimated delivery date in ISO 8601 format.
@@ -53,7 +53,7 @@ public struct TerminalHardwareShippingMethodEstimatedDeliveryWindow: Codable {
     }
 }
 
-public enum TerminalHardwareShippingMethodName: String, Codable {
+public enum TerminalHardwareShippingMethodName: String, Codable, Sendable {
     /// Standard
     case standard
     /// Express
@@ -62,14 +62,14 @@ public enum TerminalHardwareShippingMethodName: String, Codable {
     case priority
 }
 
-public enum TerminalHardwareShippingMethodStatus: String, Codable {
+public enum TerminalHardwareShippingMethodStatus: String, Codable, Sendable {
     /// Available for new orders.
     case available
     /// Can no longer be used for order creation.
     case unavailable
 }
 
-public struct TerminalHardwareShippingMethodList: Codable {
+public struct TerminalHardwareShippingMethodList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

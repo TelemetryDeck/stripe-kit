@@ -7,7 +7,7 @@
 //
 
 
-public struct DeletedObject: Codable {
+public struct DeletedObject: Codable, Sendable {
     public var id: String
     public var object: String
     public var deleted: Bool

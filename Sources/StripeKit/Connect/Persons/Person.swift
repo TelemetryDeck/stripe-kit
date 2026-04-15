@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Persons Object](https://stripe.com/docs/api/persons/object)
-public struct Person: Codable {
+public struct Person: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The account the person is associated with.
@@ -129,7 +129,7 @@ public struct Person: Codable {
     }
 }
 
-public struct PersonDOB: Codable {
+public struct PersonDOB: Codable, Sendable {
     /// The day of birth, between 1 and 31.
     public var day: Int?
     /// The month of birth, between 1 and 12.
@@ -146,19 +146,19 @@ public struct PersonDOB: Codable {
     }
 }
 
-public enum PersonGender: String, Codable {
+public enum PersonGender: String, Codable, Sendable {
     case male
     case female
 }
 
-public enum PersonPoliticalExposure: String, Codable {
+public enum PersonPoliticalExposure: String, Codable, Sendable {
     /// The person has disclosed that they have no political exposure
     case none
     /// The person has disclosed that they do have political exposure
     case existing
 }
 
-public struct PersonRelationship: Codable {
+public struct PersonRelationship: Codable, Sendable {
     /// Whether the person is a director of the account’s legal entity. Currently only required for accounts in the EU. Directors are typically members of the governing board of the company, or responsible for ensuring the company meets its regulatory obligations.
     public var director: Bool?
     /// Whether the person has significant responsibility to control, manage, or direct the organization.
@@ -187,7 +187,7 @@ public struct PersonRelationship: Codable {
     }
 }
 
-public struct PersonRequirements: Codable {
+public struct PersonRequirements: Codable, Sendable {
     /// Fields that are due and can be satisfied by providing the corresponding alternative fields instead.
     public var alternatives: [PersonRequirementsAlternative]?
     /// Fields that need to be collected to keep the person’s account enabled. If not collected by the account’s `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.
@@ -216,7 +216,7 @@ public struct PersonRequirements: Codable {
     }
 }
 
-public struct PersonRequirementsAlternative: Codable {
+public struct PersonRequirementsAlternative: Codable, Sendable {
     /// Fields that can be provided to satisfy all fields in `original_fields_due`.
     public var alternativeFieldsDue: [String]?
     /// Fields that are due and can be satisfied by providing all fields in `alternative_fields_due`.
@@ -228,7 +228,7 @@ public struct PersonRequirementsAlternative: Codable {
     }
 }
 
-public struct PersonRequirementsError: Codable {
+public struct PersonRequirementsError: Codable, Sendable {
     /// The code for the type of error.
     public var code: PersonRequirementsErrorCode?
     
@@ -237,7 +237,7 @@ public struct PersonRequirementsError: Codable {
     }
 }
 
-public enum PersonRequirementsErrorCode: String, Codable {
+public enum PersonRequirementsErrorCode: String, Codable, Sendable {
     /// The combination of the city, state, and postal code in the provided address could not be validated.
     case invalidAddressCityStatePostalCode = "invalid_address_city_state_postal_code"
     /// The street name and/or number for the provided address could not be validated.
@@ -338,7 +338,7 @@ public enum PersonRequirementsErrorCode: String, Codable {
     case invalidDobAgeUnder18 = "invalid_dob_age_under_18"
 }
 
-public struct PersonFutureRequirements: Codable {
+public struct PersonFutureRequirements: Codable, Sendable {
     /// Fields that are due and can be satisfied by providing the corresponding alternative fields instead.
     public var alternatives: [PersonRequirementsAlternative]?
     /// Fields that need to be collected to keep the person’s account enabled. If not collected by the account’s `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.
@@ -367,7 +367,7 @@ public struct PersonFutureRequirements: Codable {
     }
 }
 
-public struct PersonVerification: Codable {
+public struct PersonVerification: Codable, Sendable {
     /// A document showing address, either a passport, local ID card, or utility bill from a well-known utility company.
     public var additionalDocument: PersonVerificationDocument?
     /// A user-displayable string describing the verification state for the person. For example, this may say “Provided identity information could not be verified”.
@@ -392,7 +392,7 @@ public struct PersonVerification: Codable {
     }
 }
 
-public enum PersonVerificationDetailsCode: String, Codable {
+public enum PersonVerificationDetailsCode: String, Codable, Sendable {
     case documentAddressMismatch = "document_address_mismatch"
     case documentDobMismatch = "document_dob_mismatch"
     case documentDuplicateType = "document_duplicate_type"
@@ -403,7 +403,7 @@ public enum PersonVerificationDetailsCode: String, Codable {
     case failedOther = "failed_other"
 }
 
-public struct PersonVerificationDocument: Codable {
+public struct PersonVerificationDocument: Codable, Sendable {
     /// The back of a document returned by a file upload with a `purpose` value of `additional_verification`.
     @Expandable<File> public var back: String?
     /// A user-displayable string describing the verification state of this document. For example, if a document is uploaded and the picture is too fuzzy, this may say “Identity document is too unclear to read”.
@@ -424,7 +424,7 @@ public struct PersonVerificationDocument: Codable {
     }
 }
 
-public enum PersonVerificationDocumentDetailsCode: String, Codable {
+public enum PersonVerificationDocumentDetailsCode: String, Codable, Sendable {
     case documentCorrupt = "document_corrupt"
     case documentCountryNotSupported = "document_country_not_supported"
     case documentExpired = "document_expired"
@@ -445,13 +445,13 @@ public enum PersonVerificationDocumentDetailsCode: String, Codable {
     case documentTypeNotSupported = "document_type_not_supported"
 }
 
-public enum PersonVerificationStatus: String, Codable {
+public enum PersonVerificationStatus: String, Codable, Sendable {
     case unverified
     case pending
     case verified
 }
 
-public struct PersonsList: Codable {
+public struct PersonsList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

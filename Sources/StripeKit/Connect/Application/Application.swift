@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Application Object](https://stripe.com/docs/api/application/object)
-public struct ConnectApplication: Codable {
+public struct ConnectApplication: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The name of the application.

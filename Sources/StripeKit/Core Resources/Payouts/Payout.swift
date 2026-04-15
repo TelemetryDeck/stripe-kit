@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Payout Object](https://stripe.com/docs/api/payouts/object).
-public struct Payout: Codable {
+public struct Payout: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// Amount (in cents) to be transferred to your bank account or debit card.
@@ -105,7 +105,7 @@ public struct Payout: Codable {
     }
 }
 
-public enum PayoutFailureCode: String, Codable {
+public enum PayoutFailureCode: String, Codable, Sendable {
     /// The bank account has been closed.
     case accountClosed = "account_closed"
     /// The bank account has been frozen.
@@ -138,24 +138,24 @@ public enum PayoutFailureCode: String, Codable {
     case unsupportedCard = "unsupported_card"
 }
 
-public enum PayoutMethod: String, Codable {
+public enum PayoutMethod: String, Codable, Sendable {
     case standard
     case instant
 }
 
-public enum PayoutReconciliationStatus: String, Codable {
+public enum PayoutReconciliationStatus: String, Codable, Sendable {
     case notApplicable = "not_applicable"
     case inProgress = "in_progress"
     case completed
 }
 
-public enum PayoutSourceType: String, Codable {
+public enum PayoutSourceType: String, Codable, Sendable {
     case card
     case fpx
     case bankAccount = "bank_account"
 }
 
-public enum PayoutStatus: String, Codable {
+public enum PayoutStatus: String, Codable, Sendable {
     case paid
     case pending
     case inTransit = "in_transit"
@@ -163,12 +163,12 @@ public enum PayoutStatus: String, Codable {
     case failed
 }
 
-public enum PayoutType: String, Codable {
+public enum PayoutType: String, Codable, Sendable {
     case bankAccount = "bank_account"
     case card
 }
 
-public struct PayoutsList: Codable {
+public struct PayoutsList: Codable, Sendable {
     public var object: String
     public var hasMore: Bool?
     public var url: String?

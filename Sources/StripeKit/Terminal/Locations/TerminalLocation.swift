@@ -8,7 +8,7 @@
 import Foundation
 
 /// The [Location Object](https://stripe.com/docs/api/terminal/locations/object)
-public struct TerminalLocation: Codable {
+public struct TerminalLocation: Codable, Sendable {
     /// Unique identifier for the object.
     public var id: String
     /// The full address of the location.
@@ -41,7 +41,7 @@ public struct TerminalLocation: Codable {
     }
 }
 
-public struct TerminalLocationList: Codable {
+public struct TerminalLocationList: Codable, Sendable {
     public var object: String
     public var data: [TerminalLocation]?
     public var hasMore: Bool?

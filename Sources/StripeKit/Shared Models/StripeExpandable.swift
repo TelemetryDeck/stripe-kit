@@ -1,6 +1,6 @@
 //
 //  StripeExpandable.swift
-//  
+//
 //
 //  Created by Andrew Edwards on 4/11/20.
 //
@@ -22,44 +22,43 @@ extension KeyedDecodingContainer {
 }
 
 @propertyWrapper
-public struct Expandable<Model: Codable>: Codable {
-    
-    private enum ExpandableState {
+public struct Expandable<Model: Codable>: Codable, Sendable where Model: Sendable {
+    private enum ExpandableState: Sendable {
         case unexpanded(String)
         indirect case expanded(Model)
         case empty
     }
-    
+
     public init(model: Model) {
         self._state = .expanded(model)
     }
-    
+
     public init(id: String?) {
         if let id {
             self._state = .unexpanded(id)
         } else {
             self._state = .empty
-        }        
+        }
     }
-    
+
     public init() {
         self._state = .empty
     }
-    
+
     public init(from decoder: Decoder) throws {
         if let container = try decoder.singleValueContainerIfPresentAndNotNull() {
             do {
-                self._state = .unexpanded(try container.decode(String.self))
-            } catch DecodingError.typeMismatch(let type, _) where type is String.Type {
-                self._state = .expanded(try container.decode(Model.self))
+                self._state = try .unexpanded(container.decode(String.self))
+            } catch let DecodingError.typeMismatch(type, _) where type is String.Type {
+                self._state = try .expanded(container.decode(Model.self))
             }
         } else {
             self._state = .empty
         }
     }
-    
+
     private var _state: ExpandableState
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
 
@@ -72,29 +71,29 @@ public struct Expandable<Model: Codable>: Codable {
             try container.encodeNil()
         }
     }
-    
+
     public var wrappedValue: String? {
         switch _state {
-        case .unexpanded(let id):
+        case let .unexpanded(id):
             return id
         case .expanded(_), .empty:
             return nil
         }
     }
-        
+
     public var projectedValue: Model? {
         switch _state {
         case .unexpanded(_), .empty:
             return nil
-        case .expanded(let model):
+        case let .expanded(model):
             return model
         }
     }
 }
 
 @propertyWrapper
-public struct DynamicExpandable<A: Codable, B: Codable>: Codable {
-    private enum ExpandableState {
+public struct DynamicExpandable<A: Codable, B: Codable>: Codable, Sendable where A: Sendable, B: Sendable {
+    private enum ExpandableState: @unchecked Sendable {
         case unexpanded(String)
         indirect case expanded(Codable)
         case empty
@@ -103,11 +102,11 @@ public struct DynamicExpandable<A: Codable, B: Codable>: Codable {
     public init(model: A) {
         self._state = .expanded(model)
     }
-    
+
     public init(model: B) {
         self._state = .expanded(model)
     }
-    
+
     public init(id: String?) {
         if let id {
             self._state = .unexpanded(id)
@@ -115,30 +114,30 @@ public struct DynamicExpandable<A: Codable, B: Codable>: Codable {
             self._state = .empty
         }
     }
-    
+
     public init() {
         self._state = .empty
     }
-    
+
     public init(from decoder: Decoder) throws {
         let codingPath = decoder.codingPath
         do {
             let container = try decoder.singleValueContainer()
             do {
                 if container.decodeNil() {
-                    _state = .empty
+                    self._state = .empty
                 } else {
-                    _state = .unexpanded(try container.decode(String.self))
+                    self._state = try .unexpanded(container.decode(String.self))
                 }
-            } catch DecodingError.typeMismatch(let type, _) where type is String.Type {
+            } catch let DecodingError.typeMismatch(type, _) where type is String.Type {
                 do {
-                    _state = .expanded(try container.decode(A.self))
+                    self._state = try .expanded(container.decode(A.self))
                 } catch { // can't catch a specific error here, any particular B might partially decode as A
-                    _state = .expanded(try container.decode(B.self))
+                    self._state = try .expanded(container.decode(B.self))
                 }
             }
-        } catch DecodingError.keyNotFound(_, let context) where context.codingPath.count == codingPath.count {
-            _state = .empty
+        } catch let DecodingError.keyNotFound(_, context) where context.codingPath.count == codingPath.count {
+            self._state = .empty
         }
     }
 
@@ -146,7 +145,7 @@ public struct DynamicExpandable<A: Codable, B: Codable>: Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        
+
         switch _state {
         case let .unexpanded(id):
             try container.encode(id)
@@ -162,23 +161,23 @@ public struct DynamicExpandable<A: Codable, B: Codable>: Codable {
             try container.encodeNil()
         }
     }
-    
+
     public var wrappedValue: String? {
         switch _state {
-        case .unexpanded(let id):
+        case let .unexpanded(id):
             return id
         case .expanded(_), .empty:
             return nil
         }
     }
-        
-    public var projectedValue: DynamicExpandable<A,B> { self }
-    
+
+    public var projectedValue: DynamicExpandable<A, B> { self }
+
     public func callAsFunction<T: Codable>(as type: T.Type) -> T? {
         switch _state {
         case .unexpanded(_), .empty:
             return nil
-        case .expanded(let model):
+        case let .expanded(model):
             if let model = model as? T {
                 return model
             } else {
@@ -189,8 +188,8 @@ public struct DynamicExpandable<A: Codable, B: Codable>: Codable {
 }
 
 @propertyWrapper
-public struct ExpandableCollection<Model: Codable>: Codable {
-    private enum ExpandableState {
+public struct ExpandableCollection<Model: Codable>: Codable, Sendable where Model: Sendable {
+    private enum ExpandableState: Sendable {
         case unexpanded([String])
         indirect case expanded([Model])
         case empty
@@ -199,7 +198,7 @@ public struct ExpandableCollection<Model: Codable>: Codable {
     public init() {
         self._state = .empty
     }
-    
+
     public init(ids: [String]?) {
         if let ids {
             self._state = .unexpanded(ids)
@@ -207,7 +206,7 @@ public struct ExpandableCollection<Model: Codable>: Codable {
             self._state = .empty
         }
     }
-    
+
     public init(models: [Model]?) {
         if let models {
             self._state = .expanded(models)
@@ -215,21 +214,21 @@ public struct ExpandableCollection<Model: Codable>: Codable {
             self._state = .empty
         }
     }
-    
+
     public init(from decoder: Decoder) throws {
         if let container = try decoder.singleValueContainerIfPresentAndNotNull() {
             do {
-                self._state = .unexpanded(try container.decode([String].self))
-            } catch DecodingError.typeMismatch(let type, _) where type is String.Type {
-                self._state = .expanded(try container.decode([Model].self))
+                self._state = try .unexpanded(container.decode([String].self))
+            } catch let DecodingError.typeMismatch(type, _) where type is String.Type {
+                self._state = try .expanded(container.decode([Model].self))
             }
         } else {
             self._state = .empty
         }
     }
-    
+
     private var _state: ExpandableState
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
 
@@ -242,38 +241,37 @@ public struct ExpandableCollection<Model: Codable>: Codable {
             try container.encodeNil()
         }
     }
-    
+
     public var wrappedValue: [String]? {
         switch _state {
-        case .unexpanded(let ids):
+        case let .unexpanded(ids):
             return ids
         case .expanded(_), .empty:
             return nil
         }
     }
-        
+
     public var projectedValue: [Model]? {
         switch _state {
         case .unexpanded(_), .empty:
             return nil
-        case .expanded(let models):
+        case let .expanded(models):
             return models
         }
     }
 }
 
-internal extension Decoder {
+extension Decoder {
     func singleValueContainerIfPresentAndNotNull() throws -> SingleValueDecodingContainer? {
         do {
-            let container = try self.singleValueContainer()
-            
+            let container = try singleValueContainer()
+
             if container.decodeNil() {
                 return nil
             }
             return container
-        }
-        catch DecodingError.keyNotFound(_, let context)
-            where context.codingPath.count == self.codingPath.count
+        } catch let DecodingError.keyNotFound(_, context)
+            where context.codingPath.count == codingPath.count
         {
             return nil
         }
