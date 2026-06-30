@@ -41,13 +41,13 @@ public protocol PortalConfigurationRoutes: StripeAPIRoute {
     
     /// Retrieves a configuration that describes the functionality of the customer portal.
     /// - Parameter configuration: The identifier of the configuration to retrieve.
-    func retrieve(configuration: String) async throws -> PortalConfiguration
+    func retrieve(configuration: String, expand: [String]?) async throws -> PortalConfiguration
     
     /// Returns a list of tax IDs for a customer.
     ///
     /// - Parameter filter: A dictionary that will be used for the query parameters.
     /// - Returns: A `StripePortalConfigurationList`.
-    func listAll(filter: [String: Any]?) async throws -> PortalConfigurationList
+    func listAll(filter: [String: Any]?, expand: [String]?) async throws -> PortalConfigurationList
 }
 
 public struct StripePortalConfigurationRoutes: PortalConfigurationRoutes {
@@ -122,14 +122,22 @@ public struct StripePortalConfigurationRoutes: PortalConfigurationRoutes {
         return try await apiHandler.send(method: .POST, path: "\(portalconfiguration)/\(configuration)", body: .string(body.queryParameters), headers: headers)
     }
     
-    public func retrieve(configuration: String) async throws -> PortalConfiguration {
-        try await apiHandler.send(method: .GET, path: "\(portalconfiguration)/\(configuration)", headers: headers)
+    public func retrieve(configuration: String, expand: [String]? = nil) async throws -> PortalConfiguration {
+        var queryParams = ""
+        if let expand {
+            queryParams += ["expand": expand].queryParameters
+        }
+        
+        return try await apiHandler.send(method: .GET, path: "\(portalconfiguration)/\(configuration)", query: queryParams, headers: headers)
     }
     
-    public func listAll(filter: [String: Any]? = nil) async throws -> PortalConfigurationList {
+    public func listAll(filter: [String: Any]? = nil, expand: [String]? = nil) async throws -> PortalConfigurationList {
         var queryParams = ""
         if let filter {
             queryParams = filter.queryParameters
+        }
+        if let expand {
+            queryParams += ["expand": expand].queryParameters
         }
         
         return try await apiHandler.send(method: .GET, path: portalconfiguration, query: queryParams, headers: headers)
