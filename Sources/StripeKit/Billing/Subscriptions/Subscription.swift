@@ -403,11 +403,11 @@ public enum SubscriptionTrialSettingsEndBehaviorMissingPaymentMethod: String, Co
 
 public struct SubscriptionTransferData: Codable, Sendable {
     /// A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the destination account. By default, the entire amount is transferred to the destination.
-    public var amountPercent: Int?
+    public var amountPercent: Decimal?
     /// The account where funds from the payment will be transferred to upon payment success.
     @Expandable<ConnectAccount> public var destination: String?
-    
-    public init(amountPercent: Int? = nil, destination: String? = nil) {
+
+    public init(amountPercent: Decimal? = nil, destination: String? = nil) {
         self.amountPercent = amountPercent
         self._destination = Expandable(id: destination)
     }

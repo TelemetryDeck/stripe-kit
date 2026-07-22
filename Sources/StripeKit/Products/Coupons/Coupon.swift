@@ -25,7 +25,7 @@ public struct Coupon: Codable, Sendable {
     /// Name of the coupon displayed to customers on for instance invoices or receipts.
     public var name: String?
     /// Percent that will be taken off the subtotal of any invoices for this customer for the duration of the coupon. For example, a coupon with `percent_off` of 50 will make a $100 invoice $50 instead.
-    public var percentOff: Int?
+    public var percentOff: Decimal?
     /// String representing the object’s type. Objects of the same type share the same value.
     public var object: String
     /// Contains information about what this coupon applies to. This field is not included by default. To include it in the response, expand the `applies_to` field.
@@ -52,7 +52,7 @@ public struct Coupon: Codable, Sendable {
                 durationInMonths: Int? = nil,
                 metadata: [String : String]? = nil,
                 name: String? = nil,
-                percentOff: Int? = nil,
+                percentOff: Decimal? = nil,
                 object: String,
                 appliesTo: String? = nil,
                 created: Date,
